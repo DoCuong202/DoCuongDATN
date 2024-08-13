@@ -1,0 +1,21 @@
+﻿@model BanHangOnline.Models.OverViewModel
+
+@if (Model != null)
+{
+
+
+    <div class="col-sm-4 invoice-col">
+        Địa chỉ người nhận
+        <address>
+            <strong>@Model.CustomerName</strong><br>
+            @Model.Address<br>
+            Phone: @Model.Phone<br>
+        </address>
+    </div>
+}
+else
+{
+    <p class="">Vui lòng cập nhật thông tin!</p>
+}
+
+

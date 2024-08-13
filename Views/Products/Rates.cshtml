@@ -1,0 +1,29 @@
+﻿@model BanHangOnline.Models.EF.Rate
+
+@if (Model != null)
+{
+    <div class="tab_title reviews_title">
+        <h4>Reviews @ViewBag.Count</h4>
+    </div>
+
+    <!-- User Review -->
+
+    <div class="user_review_container d-flex flex-column flex-sm-row">
+
+        <div class="review">
+            <div class="review_date">27 Aug 2016</div>
+            <div class="user_name">Brandon William</div>
+            <div class="user_rating">
+                <ul class="star_rating">
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                </ul>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+    </div>
+}
+

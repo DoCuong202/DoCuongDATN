@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.OrderDetail>
+
+@if (Model != null && Model.Any())
+{
+    var stt = 0;
+    <div class="row">
+        <div class="col-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var thanhtien = item.Quantity * item.Price;
+                        <tr class="my-auto" style="height: 50px; line-height:50px;">
+                            <td>@stt</td>
+                            <td>@item.ProductID</td>
+                            <td>@item.Product.Title</td>
+                            <td><img src="@item.Product.Image" style="height: 50px;"/></td>
+                            <td>@BanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
+                            <td>@item.Quantity</td>
+                            <td>@BanHangOnline.Common.Common.FormatNumber(thanhtien, 0)</td>
+                        </tr>
+                        stt++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+}
+

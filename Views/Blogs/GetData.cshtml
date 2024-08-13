@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.Posts>
+<link href="~/Content/Assets/styles/main_styles.css" rel="stylesheet" />
+<style>
+
+    .blog_item_t {
+        height: 110px;
+        width: 100%;
+        display: flex;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: .5s;
+    }
+
+    .blog_item_t:hover .blog_item_t{
+        margin-left: 15px;
+    }
+
+    .blog-img {
+        width: 30%;
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .blog-content{
+        width: 70%;
+        display: block;
+        background-color: #f1efef;
+    }
+
+    .blog_title_t {
+        display: -webkit-box;
+        font-size: 15px;
+        font-weight: 700;
+        grid-area: auto;
+        line-height: 18px;
+        height: 70px;
+        text-align: left;
+        margin: 0px;
+        padding: 10px;
+    }
+
+    .blog_item_t a {
+        color: #2e2e2e;
+    }
+
+    .blog_des {
+        color: #353535;
+        display: -webkit-box;
+        font-weight: 500;
+        grid-area: auto;
+        height: 40px;
+        margin: 0px;
+        padding: 5px;
+    }
+
+    .blog_createday {
+        color: #fe4c50;
+        display: inline;
+        grid-area: auto;
+        height: 40px;
+        line-height: 30px;
+        padding: 10px;
+    }
+</style>
+
+@if (Model != null && Model.Any())
+{
+
+    foreach (var item in Model)
+    {
+            <div class="blog_item_t">
+                <div class="blog-img" style="background-image: url(@item.Image)">
+                </div>
+                <div class="blog-content">
+                    <h4 class="blog_title_t"> <a href="cauchuyenamthuc/@item.Alias-@item.Id"> @item.Title</a></h4>
+                    @*<p class="blog_des"> @item.Description</p>*@
+                    <div class="d-flex justify-content-between blog_createday" style="">
+                        <span class="">
+                            <i class="fa fa-clock-o"></i>
+                            @item.CreatedDate.Day/@item.CreatedDate.Month/@item.CreatedDate.Year
+                        </span>
+                        <span><a href="cauchuyenamthuc/@item.Alias-@item.Id" target="_blank">see more</a></span>
+                    </div>
+                </div>
+            </div>
+
+    }
+}

@@ -1,0 +1,53 @@
+﻿@model BanHangOnline.Models.EF.Posts
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .title {
+        margin-bottom: 20px;
+        line-height: 24px;
+    }
+
+    .content {
+        margin-bottom: 0px;
+        line-height: 1.7;
+        color: #51545f;
+    }
+    .blog_createday-detail {
+        color: #808080;
+        font-size: 14px;
+    }
+</style>
+
+<div class="container" style="margin-top: 180px;">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4 class="title"><i>@Model.Title</i></h4>
+            <span class="blog_createday-detail">
+                <i class="fa fa-clock-o"></i>
+                @Model.CreatedDate.Day/@Model.CreatedDate.Month/@Model.CreatedDate.Year
+            </span>
+            <hr />
+            <p class="content">@Html.Raw(Model.Detail)</p>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="Blog_LQ">
+                        <h4>NEW POST</h4>
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <div class="row">
+                        @Html.Action("GetData", "Blogs")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+</div>
+

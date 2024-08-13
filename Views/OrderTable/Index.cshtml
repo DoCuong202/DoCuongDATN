@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .orderTable {
+        /*margin-top: 150px;*/
+    }
+
+    .elementor-widget-container {
+        margin: 0px 0px 45px 0px;
+    }
+
+    .form-label {
+        color: #262626;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 800;
+        grid-area: auto;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .h2_title {
+        color: #b76f2c;
+        font-family: SVN-Hydrella;
+        font-size: 33px;
+        font-weight: 600;
+        grid-area: auto;
+        line-height: 74px;
+        text-align: center;
+    }
+
+    .form-control {
+        height: 40px;
+        border-color: #b76f2c;
+        border-style: solid;
+        border-width: 1px;
+        color: #262626;
+        font-family: Texturina;
+        font-size: 18px;
+        font-weight: 200;
+        grid-area: auto;
+        line-height: 28px;
+        padding: 0px 20px;
+    }
+
+    .btn-search {
+    }
+</style>
+<div class="main_slider">
+    @Html.Action("ViewSwiperMain4", "Swiper")
+
+</div>
+<div class="orderTable">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="banner">
+                    <div class="container">
+                        <div class="row d-flex justify-content-around text-center">
+                            <div class="col-md-12 text-center mt-4 mb-4">
+                                <div class="section_title">
+                                    <h2>
+                                        SƠ ĐỒ
+                                    </h2>
+                                    <div class="hr_title"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="banner">
+                    <div class="container">
+                        <div class="row d-flex justify-content-around text-center">
+                            <div class="col-md-12 text-center mt-4 mb-4">
+                                <div class="section_title">
+                                    <h2 class="h2_title">
+                                        ĐẶT BÀN
+                                    </h2>
+                                    <div class="hr_title"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-content-center text-center align-items-center">
+                    <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+                </div>
+
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Họ tên</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Số điện thoại</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Số người</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Khung giờ</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Khung giờ</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Tìm kiếm bàn</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Ghi chú</label>
+                        <textarea type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></textarea>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+

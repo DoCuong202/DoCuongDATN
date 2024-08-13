@@ -1,0 +1,16 @@
+﻿
+@model IEnumerable<BanHangOnline.Models.EF.ProductImage>
+@if (Model != null && Model.Any())
+{
+    <div class="single_product_thumbnails">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li><img src="@item.Image" alt="" data-image="@item.Image"></li>
+            }
+            @*<li><img src="images/single_1_thumb.jpg" alt="" data-image="images/single_1.jpg"></li>
+                <li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>
+                <li><img src="images/single_3_thumb.jpg" alt="" data-image="images/single_3.jpg"></li>*@
+        </ul>
+    </div>
+}

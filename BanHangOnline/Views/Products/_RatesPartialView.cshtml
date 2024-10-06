@@ -1,0 +1,196 @@
+﻿@model List<BanHangOnline.Models.EF.Rate>
+
+<style>
+    .tabs_review li {
+        margin-left: 10px;
+        cursor: pointer;
+    }
+</style>
+@if (Model != null)
+{
+    <input style="display: none;" id="IdProducts", value="@ViewBag.Id" />
+    <div class="tab_title reviews_title">
+        <h4>Đánh giá (@ViewBag.Count)</h4>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="tabs_review_container mt-2 mb-4">
+                <ul class="tabs_review d-flex flex-sm-row flex-column align-items-left align-items-md-start justify-content-start">
+                    <li><button type="button" class="btn btn-block btn-outline btn-sm active" data-tab="tab_0" data-id="0">Tất cả</button></li>
+                    <li><button type="button" class="btn btn-block btn-outline btn-sm" data-tab="tab_1" data-id="1">1 Sao</button></li>
+                    <li><button type="button" class="btn btn-block btn-outline btn-sm" data-tab="tab_2" data-id="2">2 Sao</button></li>
+                    <li><button type="button" class="btn btn-block btn-outline btn-sm" data-tab="tab_3" data-id="3">3 Sao</button></li>
+                    <li><button type="button" class="btn btn-block btn-outline btn-sm" data-tab="tab_4" data-id="4">4 Sao</button></li>
+                    <li><button type="button" class="btn btn-block btn-outline btn-sm" data-tab="tab_5" data-id="5">5 Sao</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Review -->
+<div class="Rates_Rv">
+    <div class="user_review_container row 0Star">
+        @foreach (var item in Model)
+        {
+            <div class="col-12">
+                <div class="review">
+                    <div class="user_name">@item.NameUser</div>
+                    <div class="review_date">@item.NgayTao</div>
+                    <div class="user_rating">
+                        <ul class="star_rating">
+                            @for (int i = 0; i < item.StartRate; i++)
+                            {
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <p>@item.ContentRate</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="user_review_container row 1Star">
+        @foreach (var item in Model.Where(x => x.StartRate == 1))
+        {
+            <div class="col-12">
+                <div class="review">
+                    <div class="user_name">@item.NameUser</div>
+                    <div class="review_date">@item.NgayTao</div>
+                    <div class="user_rating">
+                        <ul class="star_rating">
+                            @for (int i = 0; i < item.StartRate; i++)
+                            {
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <p>@item.ContentRate</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="user_review_container row 2Star">
+        @foreach (var item in Model.Where(x => x.StartRate == 2))
+        {
+            <div class="col-12">
+                <div class="review">
+                    <div class="user_name">@item.NameUser</div>
+                    <div class="review_date">@item.NgayTao</div>
+                    <div class="user_rating">
+                        <ul class="star_rating">
+                            @for (int i = 0; i < item.StartRate; i++)
+                            {
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <p>@item.ContentRate</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="user_review_container row 3Star">
+        @foreach (var item in Model.Where(x => x.StartRate == 3))
+        {
+            <div class="col-12">
+                <div class="review">
+                    <div class="user_name">@item.NameUser</div>
+                    <div class="review_date">@item.NgayTao</div>
+                    <div class="user_rating">
+                        <ul class="star_rating">
+                            @for (int i = 0; i < item.StartRate; i++)
+                            {
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <p>@item.ContentRate</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="user_review_container row 4Star">
+        @foreach (var item in Model.Where(x => x.StartRate == 4))
+        {
+            <div class="col-12">
+                <div class="review">
+                    <div class="user_name">@item.NameUser</div>
+                    <div class="review_date">@item.NgayTao</div>
+                    <div class="user_rating">
+                        <ul class="star_rating">
+                            @for (int i = 0; i < item.StartRate; i++)
+                            {
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <p>@item.ContentRate</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="user_review_container row 5Star">
+        @foreach (var item in Model.Where(x => x.StartRate == 5))
+        {
+            <div class="col-12">
+                <div class="review">
+                    <div class="user_name">@item.NameUser</div>
+                    <div class="review_date">@item.NgayTao</div>
+                    <div class="user_rating">
+                        <ul class="star_rating">
+                            @for (int i = 0; i < item.StartRate; i++)
+                            {
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <p>@item.ContentRate</p>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.Rates_Rv .user_review_container').hide();
+        $('.Rates_Rv .user_review_container.row.' + 0 + 'Star').show();
+
+        $('.tabs_review button').click(function () {
+            // Lấy data-id của nút được click
+            var starId = $(this).data('id');
+
+            // Ẩn tất cả các khối chứa đánh giá
+            $('.Rates_Rv .user_review_container').hide();
+
+            // Hiển thị khối chứa đánh giá tương ứng với số sao được chọn
+            $('.Rates_Rv .user_review_container.row.' + starId + 'Star').show();
+
+            // Loại bỏ lớp active khỏi tất cả các nút
+            $('.tabs_review button').removeClass('active');
+
+            // Thêm lớp active cho nút được click
+            $(this).addClass('active');
+        });
+
+
+
+        // Sự kiện khi click vào button
+        //$(".tabs_review_container button").click(function () {
+        //    $(".tabs_review_container button").removeClass("active");
+        //    $(this).addClass("active");
+        //    var star = $(this).data("id");
+        //    var Id = $("#IdProducts").val();
+
+        //    $(".user_review_container").hide();
+        //    $("." + star + "Star").show();
+        //});
+
+
+    });
+</script>
+

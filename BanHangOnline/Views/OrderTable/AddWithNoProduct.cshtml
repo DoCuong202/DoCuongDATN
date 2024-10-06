@@ -1,0 +1,159 @@
+﻿@model BanHangOnline.Models.EF.OrderTable
+@{
+    ViewBag.Title = "ToOrderDetail";
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Content/Assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Content/clients/dist/css/adminlte.min.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/bootstrap4/bootstrap.min.css">
+<link href="~/Content/Assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="~/Content/Assets/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_responsive.css">
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<style>
+    .cn-order-detail {
+        margin-top: 180px;
+    }
+</style>
+@if (Model != null)
+{
+    var datenow = DateTime.Now;
+    var tongtien = decimal.Zero;
+    var sl = 0;
+    var Total = decimal.Zero;
+    var Tax = decimal.Zero;
+    var shipping = decimal.Zero;
+    <div class="container cn-order-detail">
+
+        <div class="invoice p-3 mb-3">
+            <div class="row">
+                <div class="col-12 mb-5">
+                    <h4>
+                        <div class="logo_container">
+                            <a href="">colo<span>shop</span></a>
+                        </div>
+                    </h4>
+                </div>
+                <div class="col-12 mb-5 text-center">
+                    <h4>
+                        ĐẶT BÀN THÀNH CÔNG
+                    </h4>
+                    <p>Chi tiết đơn hàng đặt bàn</p>
+                </div>
+            </div>
+            <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    Địa chỉ nhà hàng
+                    <address>
+                        <strong>BUI HUY BAO</strong><br>
+                        795 Folsom Ave, Suite 600<br>
+                        San Francisco, CA 94107<br>
+                        Phone: (804) 123-5432<br>
+                        Email: info@almasaeedstudio.com
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    Người đặt
+                    <address>
+                        <strong>@Model.CustomerName</strong><br>
+                        @Model.Phone<br>
+                        Phone: @Model.CountCustomer<br>
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    Thời gian<br>
+                    <b>Ngày đặt:</b> @Model.Day<br>
+                    Thời gian: @Model.TimeStart - @Model.TimeEnd<br>
+                    Vị trí bàn: @Model.Code
+                </div>
+                <!-- /.col -->
+            </div>
+            @Html.Action("ProductInOrderDetail", "ShoppingCart", new { Id = Model.Id })
+
+            <div class="row">
+                <!-- accepted payments column -->
+                <div class="col-6">
+                    <p class="lead">Phương thức thanh toán đặt trước:</p>
+                    <img src="~/Content/clients/dist/img/credit/visa.png" alt="Visa">
+                    <img src="~/Content/clients/dist/img/credit/mastercard.png" alt="Mastercard">
+                    <img src="~/Content/clients/dist/img/credit/american-express.png" alt="American Express">
+                    <img src="~/Content/clients/dist/img/credit/paypal2.png" alt="Paypal">
+
+                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
+                        plugg
+                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                    </p>
+                </div>
+                <!-- /.col -->
+                <div class="col-6">
+                    <p class="lead">Chi phí:</p>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th style="width:50%">Số lượng:</th>
+                                    <td>@Model.Quantity</td>
+                                </tr>
+                                <tr>
+                                    <th>Tax (0.0%)</th>
+                                    <td>0đ</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipping:</th>
+                                    <td>0đ</td>
+                                </tr>
+                                <tr>
+                                    <th>Total:</th>
+                                    <td>@BanHangOnline.Common.Common.FormatNumber(Model.TotalAmount, 0)đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-12">
+                    <button type="button" class="btn btn-success PrintBill">
+                        <i class="far fa-credit-card"></i> Print
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*<script>
+        $(document).ready(function () {
+            $(".PrintBill").click(window.print());
+        })
+    </script>*@
+
+@section scripts{
+    <!-- jQuery -->
+    <script src="~/Content/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/Assets/js/single_custom.js"></script>
+}
+
+

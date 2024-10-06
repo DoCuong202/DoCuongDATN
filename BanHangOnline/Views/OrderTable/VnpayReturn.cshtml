@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "VnpayReturn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .main_slider_content h2 {
+        color: #000;
+    }
+
+    .main_slider_content h6 {
+        color: #000;
+    }
+    h1, h2, h3, h4, h5 {
+        font-family: Texturina !important;
+    }
+
+    p {
+        font-family: Texturina !important;
+        font-size: 20px !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    /*    li a {
+        font-family: Texturina !important;
+        font-size: 17px !important;
+    }*/
+
+    tr td {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    tr th {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    label {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    b, strong, a {
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+</style>
+<div class="main_slider" style="background-image: url()">
+    <div class="container fill_height">
+        <div class="row align-items-center fill_height">
+            <div class="col">
+                <div class="main_slider_content">
+                    <h2>@ViewBag.InnerText</h2>
+                    @if (ViewBag.code == 0)
+                    {
+                        <h6 id="redirectText">Tự động chuyển hướng tới hóa đơn đặt bàn sau <span id="countdown">5</span> s...</h6>
+                    }
+                    @if (ViewBag.code == 1)
+                    {
+                        <h6 id="redirectText">Tự động chuyển hướng tới trang chủ sau <span id="countdown">5</span> s...</h6>
+                    }
+                    <div class="red_button shop_now_button"><a href="#">Trang chủ</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input value="@ViewBag.code" style="display: none;" id="code" />
+<input value="@ViewBag.orderCode" style="display: none;" id="orderCode" />
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var code = $("#code").val();
+        var orderCode = $("#orderCode").val();
+        var seconds = 5; // Số giây cần đếm ngược
+
+        // Đếm ngược và tự điều hướng sau 5 giây
+        var countdownInterval = setInterval(function () {
+            seconds--;
+            $("#countdown").text(seconds); // Cập nhật số giây đếm ngược trên giao diện
+            if (seconds <= 0) {
+                clearInterval(countdownInterval); // Dừng đếm ngược khi đạt 0
+                if (code == 0) {
+                    var newHref = '/checkout-datban/order-detail/' + orderCode;
+                    window.location.href = location.origin + newHref;
+                }
+                if (code == 1) {
+                    window.location.href = location.origin;
+                }
+            }
+        }, 1000); // Mỗi 1 giây
+
+    });
+</script>

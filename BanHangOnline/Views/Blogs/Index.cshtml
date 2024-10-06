@@ -1,0 +1,215 @@
+﻿@model PagedList.PagedList<BanHangOnline.Models.EF.Posts>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Assets/styles/main_styles.css" rel="stylesheet" />
+<style>
+    .bg-nau {
+        background-color: #6950cc;
+        padding: 62px 0px 52px;
+        text-align: center;
+    }
+
+        .bg-nau .footer {
+            display: none;
+        }
+
+        .bg-nau:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-image: url('https://aban.com.vn/wp-content/uploads/2023/03/texture.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: calc(368px / 2);
+            height: 371px;
+        }
+
+    .bg-nau-2:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background-image: url('https://aban.com.vn/wp-content/uploads/2023/03/texture-right.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: calc(368px / 2);
+        height: 371px;
+    }
+
+    .bg-nau h2 {
+        margin-bottom: 26px;
+        margin-top: 20px;
+        color: #ffe200;
+        font-family: SVN-Hydrella;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .bg-nau p {
+        color: #fff;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 30px;
+        margin: 0px 0px 20px;
+        text-align: center;
+        padding: 0 65px;
+    }
+    .bg-nau-2{
+        width: 100%;
+    }
+    .blog-img-src{
+        width: 100%;
+    }
+    .item_khongian {
+        position: relative;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .item-bg {
+        height: 300px;
+        overflow: hidden;
+    }
+        .item-bg img {
+            width: 100%; /* Đặt độ rộng của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+            height: 100%; /* Đặt chiều cao của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+            object-fit: cover; /* Điều chỉnh hình ảnh để nó bao phủ toàn bộ khung hình */
+            object-position: center;
+        }
+
+    .imt-top {
+        height: 20px;
+        position: absolute;
+        top: -10px;
+        left: -5%;
+        width: 110%;
+    }
+
+    .imt-bottom {
+        height: 20px;
+        position: absolute;
+        bottom: -10px;
+        left: -5%;
+        width: 110%;
+    }
+    .imt-left {
+        rotate: -90deg;
+        height: 20px;
+        position: absolute;
+        top: 140px;
+        left: -52%;
+        width: 105%;
+    }
+
+    .imt-right {
+        rotate: -90deg;
+        height: 20px;
+        position: absolute;
+        top: 140px;
+        right: -52%;
+        width: 105%;
+    }
+    .blog_title_t{
+        margin-top: 30px;
+        text-align: center;
+    }
+    .blog_item_t a {
+        color: #ffe200;
+        display: inline;
+        font-family: SVN-Hydrella;
+        font-size: 29px;
+        font-weight: 500;
+        line-height: 40px;
+        text-align: center;
+    }
+    .blog_des {
+        color: #262626;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 31px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .pagination li {
+        width: 100%;
+        color: #ffe200;
+        display: inline;
+        font-size: 23px;
+        font-weight: 600;
+        line-height: 36px;
+        margin: 0px 6px 0px 0px;
+        text-align: center;
+        font-family: SVN-Hydrella;
+    }
+
+</style>
+
+<div class="main_slider" style="background-image: url(Content/Assets/images/bg_chung_toi.png)">
+    <div class="container fill_height">
+        <div class="row align-items-center fill_height">
+            <div class="col">
+                <div class="main_slider_content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-nau">
+    <div class="row">
+        <div class="bg-nau-2">
+            <div>
+                <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+            </div>
+            <div>
+                <h2>“Khám phá nhịp sống Vân Đình”</h2>
+            </div>
+            <div>
+                <p>Hãy cùng tìm hiểu và cập nhật các thông tin mới nhất về Vân Đình. Cũng nhau bắn trọn từng khoảng khắc mà Vân Đình mang lại</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            var i = ((ViewBag.page - 1) * ViewBag.size) + 1;
+            foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="blog_item_t">
+                        <div class="item_khongian">
+                            <div class="item-bg">
+                                <img src="@item.Image" />
+                            </div>
+                            <img class="imt-top" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector3.png" />
+                            <img class="imt-left" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector3.png" />
+                            <img class="imt-right" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector1.png" />
+                            <img class="imt-bottom" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector1.png" />
+                        </div>
+                        <h4 class="blog_title_t"> <a href="cauchuyenamthuc/@item.Alias-@item.Id"> @item.Title</a></h4>
+                        <p class="blog_des"> @item.Description</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h4>Không có bản ghi nào</h4>
+        }
+
+
+    </div>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    
+</div>

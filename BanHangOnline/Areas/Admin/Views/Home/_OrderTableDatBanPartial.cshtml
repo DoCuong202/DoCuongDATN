@@ -1,0 +1,100 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.OrderTable>
+
+
+@foreach (var item in Model)
+{
+    var today = DateTime.Now.ToString("dd/MM/yyyy");
+    <tr id="trow_@item.Id">
+        <th class="btnDetailorderDatBan" data-id="@item.Id" data-toggle="modal" data-target="#modal-xlDatBan" scope="row">@item.Code <i class="fa fa-external-link" aria-hidden="true"></i></th>
+        <td>@item.CreatedDate</td>
+        <td class="statusNow">
+            @if (@item.statusOrder == -1)
+            {
+                <span>Đang chuẩn bị</span>
+            }
+            else if (@item.Day.ToString("dd/MM/yyyy") == today)
+            {
+                <span>Hôm nay</span>
+            }
+            else if (@item.statusOrder == 1)
+            {
+                <span>Kết thúc</span>
+            }
+            else if (@item.statusOrder == 2)
+            {
+                <span>Thất bại</span>
+            }
+        </td>
+        <td data-id="@item.Id" class="btn btnUpdatestatusOrderTable" data-toggle="modal" data-target="#modal-defaultDatBan"><i class="fas fa-edit"></i> Cập nhật</td>
+    </tr>
+    <input type="hidden" data-id="@item.Id" id="IdOrderDatBan" />
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.btnDetailorderDatBan', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            $("#IdOrderDatBan").val(id);
+        });
+
+        $('#modal-xlDatBan').on('show.bs.modal', function () {
+            debugger
+            var idOrder = $("#IdOrderDatBan").val();
+            var url = '/admin/ordertable/Detail2/' + idOrder;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $(".body-detail").html(data);
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi tải dữ liệu đơn hàng.');
+                }
+            });
+        });
+
+        var selectedRowId; // Biến để lưu id của dòng được chọn
+        var originalStatus; // Biến để lưu trạng thái ban đầu của dòng
+
+        $(".btnUpdatestatusOrderTable").click(function () {
+            selectedRowId = $(this).data("id");
+            $("#IdOrderDatBan").val(selectedRowId);
+            // Lưu trạng thái ban đầu của dòng
+            originalStatus = $(".statusNow", "#trow_" + selectedRowId).text().trim();
+        });
+
+        $("#btnUpdateStatusDatBan").click(function () {
+            var selectedValue = $("#statusSelectDatBan").val();
+            var idOrder = $("#IdOrderDatBan").val();
+
+            $.ajax({
+                url: '/admin/ordertable/update',
+                type: 'POST',
+                data: { id: idOrder, statusOrder: selectedValue },
+                success: function (result) {
+                    var updatedRow = $("#trow_" + selectedRowId);
+                    $("#modal-defaultDatBan").hide();
+                    //$(".statusNow", updatedRow).text(getStatusText(selectedValue));
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error("Ajax request failed: ", error);
+                }
+            });
+        });
+
+        function getStatusText(statusValue) {
+            // Hàm này trả về văn bản tương ứng với giá trị trạng thái
+            if (statusValue == -1) {
+                return "Đang chuẩn bị";
+            } else if (statusValue == 0) {
+                return "Đang giao";
+            } else {
+                return "Giao thành công";
+            }
+        }
+    })
+</script>

@@ -1,0 +1,165 @@
+﻿@model PagedList.PagedList<BanHangOnline.Models.EF.Product>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Sản phẩm";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/categories_responsive.css">
+<style>
+    .product_sorting{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn-search {
+        border: none !important;
+        width: 400px !important;
+    }
+    .no-border {
+        border-radius: inherit;
+    }
+</style>
+<div class="super_container">
+
+    <!-- Header -->
+    <!-- Hamburger Menu -->
+
+    <div class="container product_section_container">
+        <div class="row">
+            <div class="col product_section clearfix">
+
+                <!-- Breadcrumbs -->
+                @*<div class="breadcrumbs d-flex flex-row align-items-center">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@ViewBag.active</a></li>
+                        </ul>
+                    </div>*@
+
+                <!-- Sidebar -->
+
+                <div class="sidebar">
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">
+                            <h5>Danh mục</h5>
+                        </div>
+                        @Html.Action("MenuCategoryInProducts", "Menu", new { title = ViewBag.active })
+                    </div>
+
+                    <!-- Price Range Filtering -->
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">
+                            <h5>Lọc Theo Giá</h5>
+                        </div>
+                        <p>
+                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            <input type="hidden" id="FromAmount" />
+                            <input type="hidden" id="ToAmount" />
+                        </p>
+                        <div id="slider-range"></div>
+                        <div class="filter_button"><span>Tìm Kiếm</span></div>
+                    </div>
+
+                </div>
+
+                <!-- Main Content -->
+
+                <div class="main_content">
+
+                    <!-- Products -->
+
+                    <div class="products_iso">
+                        <div class="row">
+                            <div class="col">
+
+                                <!-- Product Sorting -->
+
+                                <div class="product_sorting_container product_sorting_container_top">
+                                    <ul class="product_sorting">
+                                        <li>
+                                            <span class="type_sorting_text">Sắp Xếp</span>
+                                            <i class="fa fa-angle-down"></i>
+                                            <ul class="sorting_type">
+                                                @*<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Không sắp xếp</span></li>*@
+                                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Giá sản phẩm</span></li>
+                                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Tên sản phẩm</span></li>
+                                            </ul>
+                                        </li>
+                                        <li class="btn-search">
+                                            @using (Html.BeginForm("index", "Products", FormMethod.Get, new { }))
+                                            {
+                                                <div class="input-group mb-3">
+                                                    @Html.TextBox("searchText", null, new { @class = "form-control no-border", placeholder = "Nhập từ khóa tìm kiếm" })
+                                                    <button type="submit" class="btn btn-info mx-4" style="background-color: #6950cc; border: none; border-radius: inherit; ">Tìm kiếm</button>
+                                                </div>
+                                            }
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Product Grid -->
+
+                                <div class="product-grid">
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <div class="product-item @item.ProductCategory.Alias">
+                                                <div class="product discount product_filter">
+                                                    <div class="product_image">
+                                                        <a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.Id">
+                                                            <img src="@item.Image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="favorite favorite_left"></div>
+                                                    @if (item.IsSale)
+                                                    {
+                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>Sale</span></div>
+                                                    }
+                                                <div class="product_info">
+                                                    <h6 class="product_name"><a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.Id">@item.Title</a></h6>
+                                                    @if (item.PriceSale > 0 && item.IsSale == true)
+                                                    {
+                                                        <div class="product_price">@BanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0)đ<span>@BanHangOnline.Common.Common.FormatNumber(item.Price, 0)đ</span></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="product_price">@BanHangOnline.Common.Common.FormatNumber(item.Price, 0)đ</div>
+                                                    }
+                                                </div>
+                                                </div>
+                                                <div class="red_button add_to_cart_button"><a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.Id" class="btnAddCart" data-id="@item.Id">Xem Chi Tiết</a></div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="mb-3">Chưa có sản phẩm nào!</p>
+                                    }
+                                </div>
+
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/Assets/js/categories_custom.js"></script>
+    <script src="~/Scripts/AddToCart.js"></script>
+}
+

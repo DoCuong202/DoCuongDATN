@@ -1,0 +1,263 @@
+﻿@using BanHangOnline.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .title_login_h4 {
+        color: #ffe200;
+        font-family: SVN-Hydrella;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 56px;
+        text-align: center;
+    }
+    .title_login_p {
+        color: #262626;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 31px;
+        text-align: center;
+    }
+    .no-padding{
+        padding: 0px;
+    }
+    .bg-nau {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        background-color: #6950cc;
+        /*padding: 62px 0px 52px;*/
+        text-align: center;
+        border-radius: 20px;
+        margin-top: 100px;
+    }
+
+        .bg-nau .footer {
+            display: none;
+        }
+
+        .bg-nau:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-image: url('https://aban.com.vn/wp-content/uploads/2023/03/texture.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: calc(368px / 2);
+            height: 371px;
+        }
+    .bg-nau-2{
+        width: 100%;
+    }
+    .bg-nau-2:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background-image: url('https://aban.com.vn/wp-content/uploads/2023/03/texture-right.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: calc(368px / 2);
+        height: 371px;
+    }
+
+    .bg-nau h2 {
+        margin-bottom: 8px;
+        margin-top: 20px;
+        color: #ffe200;
+        font-family: SVN-Hydrella;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .bg-nau p {
+        color: #fff;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 30px;
+        margin: 0px 0px 20px;
+        text-align: center;
+        padding: 0 65px;
+    }
+    .lable_p {
+        text-align: start !important;
+        padding: 0 !important;
+        margin-top: 32px !important;
+        line-height: 0px !important;
+    }
+    .wid100 {
+        /*width: 80% !important;*/
+        padding-left: 10% !important;
+    }
+    .checkbox {
+        display: flex !important;
+        justify-content: start;
+        height: 30px;
+        color: #fff;
+        line-height: 30px;
+    }
+    .checkbox label{
+        margin-left: 10px;
+    }
+    .btn-login {
+        background: #fff;
+        font-size: 20px;
+        font-family: Texturina;
+        width: 50%;
+    }
+    .hgt-300px {
+        /*width: 300px;*/ /* Chiều rộng mong muốn của khung hình */
+        height: 360px; /* Chiều cao mong muốn của khung hình */
+        overflow: hidden; /* Cắt bớt hình ảnh nếu nó vượt ra ngoài khung hình */
+        position: relative; /* Đặt khung hình thành vị trí tương đối */
+    }
+
+        .hgt-300px img {
+            width: 100%; /* Đặt độ rộng của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+            height: 100%; /* Đặt chiều cao của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+            object-fit: cover; /* Điều chỉnh hình ảnh để nó bao phủ toàn bộ khung hình */
+            object-position: center; /* Đặt hình ảnh ở giữa khung hình */
+        }
+    .item_khongian {
+        /*overflow: hidden;*/
+        /*height: 400px;*/
+        position: relative;
+/*        margin-left: 10px;
+        margin-right: 10px;*/
+
+        margin: 70px;
+    }
+
+    .item-bg img {
+        width: 100%; /* Đặt độ rộng của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+        height: 100%; /* Đặt chiều cao của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+        object-fit: cover; /* Điều chỉnh hình ảnh để nó bao phủ toàn bộ khung hình */
+        object-position: center; /* Đặt hình ảnh ở giữa khung hình */
+    }
+
+    .imt-top {
+        height: 20px;
+        position: absolute;
+        top: -10px;
+        left: -5%;
+        width: 110%;
+    }
+
+    .imt-bottom {
+        height: 20px;
+        position: absolute;
+        bottom: -10px;
+        left: -5%;
+        width: 110%;
+    }
+
+    .imt-left {
+        width: 20px;
+        position: absolute;
+        left: -10px;
+        top: -5%;
+        height: 110%;
+    }
+
+    .imt-right {
+        width: 20px;
+        position: absolute;
+        right: -10px;
+        top: -5%;
+        height: 110%;
+    }
+    .cangiua {
+        display: flex !important;
+        justify-content: center; 
+        align-items: center;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+
+<div class="container bg-nau">
+    <div class="row">
+        <div class="bg-nau-2">
+            <div class="row">
+                <div class="col-md-7 no-padding cangiua">
+                    <div class="">
+                        <div>
+                            <h2>Đăng Nhập Tài Khoản</h2>
+                        </div>
+                        <div>
+                            <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+                        </div>
+                        <div>
+                            <p>“Đưa bản làng xa, xuống lòng thành phố”</p>
+                        </div>
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group wid100">
+                                    <p class="lable_p">Tài Khoản</p>
+                                    <div class="col-md-10 no-padding">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group wid100">
+                                    <p class="lable_p">Mật Khẩu</p>
+                                    <div class="col-md-10 no-padding">
+                                        @Html.PasswordFor(m => m.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group wid100">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            <label for="RememberMe">Nhớ tài khoản?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group wid100">
+                                    <div class="col-md-offset-2 col-md-10 no-padding">
+                                        <input type="submit" value="Đăng Nhập" class="btn btn-default btn-login" />
+                                    </div>
+                                </div>
+                                <p>
+                                    @Html.ActionLink("Tạo tài khoản mới", "Register")
+                                </p>
+                                @* Enable this once you have account confirmation enabled for password reset functionality
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>*@
+                            }
+                        </section>
+                    </div>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <div class="item_khongian">
+                        <div class="item-bg">
+                            <img src="https://aban.com.vn/wp-content/uploads/2023/03/dab9c45f0def4d04f376f1fc09a29d6b-scaled.jpg" />
+                        </div>
+                        <img class="imt-top" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector1.png" />
+                        <img class="imt-left" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector4.png" />
+                        <img class="imt-right" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector2.png" />
+                        <img class="imt-bottom" src="https://aban.com.vn/wp-content/uploads/2023/03/Vector1.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

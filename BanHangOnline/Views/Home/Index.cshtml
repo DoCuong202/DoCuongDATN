@@ -1,0 +1,618 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/Assets/styles/OurTeam_style.css" rel="stylesheet" />
+<style>
+    .box-dv {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .seeMoreBlogs {
+        height: 40px;
+        font-size: 18px;
+    }
+
+        .seeMoreBlogs a {
+            color: #3e3e3e;
+        }
+
+    /*----------------------------TEAM------------------------*/
+
+    .title_team {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .team-1 {
+        width: 100%;
+        height: 400px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .avt_img_member {
+        height: 300px;
+        overflow: hidden;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .team-word {
+        height: 100px;
+        width: 100%;
+        text-align: center;
+        background: #fe4c50;
+        color: #fff;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .team-word h5 {
+            color: #fff;
+        }
+
+        .team-word p {
+            color: #fff;
+        }
+
+    .team-space {
+        background-color: rgba(0, 0, 0, 0.534);
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 65%;
+        opacity: 0;
+        transition: .5s;
+    }
+
+    .team-1:hover > .team-space {
+        opacity: 1;
+    }
+
+    .info {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 65%;
+        color: #fff;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.534);
+        transition: .5s;
+    }
+
+    .content_info {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .team-1:hover > .info {
+        display: block;
+    }
+
+    .info-fb-space {
+        background: linear-gradient(to bottom, #ff3b3b 0%, #fd198b 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scale(0);
+        transition: .5s;
+    }
+
+    /*----------------------------POST_MAIN----------------------*/
+
+    .blogs {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .ThreePost {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        height: 400px;
+    }
+
+    .col-pos_2 {
+        padding-top: 40px;
+        position: relative;
+        display: block;
+        text-align: start;
+        padding-left: 30px;
+        padding-top: 40px;
+        color: #fff;
+        width: 100%;
+        height: 400px;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-bottom: 20px;
+    }
+
+        .col-pos_2 img {
+            width: 100%;
+        }
+
+        .col-pos_2 h3 {
+            color: #fff;
+        }
+
+        .col-pos_2 p {
+            color: #fff;
+        }
+
+    .col-hr_2 {
+        height: 3px;
+        width: 40%;
+        margin-right: 60%;
+        background-color: #fff;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .view1 footer {
+        display: none;
+    }
+
+    .section_title h2 {
+        color: #b76f2c;
+        font-family: SVN-Hydrella;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 56px;
+        text-align: center;
+    }
+
+    .section_title p {
+        color: #262626;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 31px;
+        text-align: center;
+    }
+
+    .section_title_p {
+    }
+
+
+
+    .col-pos-1 {
+        width: 100%;
+    }
+
+    .slide-pos-1 {
+        width: 100%;
+        height: 600px;
+    }
+
+    .posterr {
+        width: 100%;
+        height: 600px;
+        margin: 0px;
+        overflow: hidden;
+        background-color: #6950cc;
+    }
+
+    .col-pos {
+        padding-top: 40px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: block;
+        text-align: start;
+        padding-left: 30px;
+        padding-top: 40px;
+        color: #fff;
+        border-color: #6950cc;
+        border-width: 5px;
+        border-style: solid;
+    }
+
+        .col-pos img {
+            width: 100%;
+        }
+
+        .col-pos h3 {
+            color: #fff;
+        }
+
+        .col-pos p {
+            color: #fff;
+        }
+
+    .col-hr {
+        height: 3px;
+        width: 40%;
+        margin-right: 60%;
+        background-color: #fff;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .col-pos-1 {
+        padding-top: 100px;
+        width: 100%;
+        position: relative;
+        text-align: center;
+    }
+
+        .col-pos-1 h2 {
+            color: #fff;
+        }
+
+    .mySwiper2 {
+        background-color: #fff0;
+    }
+
+    .col-md-4 {
+        padding: 0px;
+    }
+
+    .col-md-8 {
+        padding: 0px;
+    }
+
+    .parallax-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .section_title_2 h2 {
+        color: #ffe200;
+        font-family: SVN-Hydrella;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 50px;
+        margin: 20px 0px 26px;
+        text-align: center;
+        text-shadow: #00000003 0px 0px 1px;
+    }
+    .section_title_2 p {
+        color: #fff;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 30px;
+        margin: 0px 0px 20px;
+        padding: 0px 65px;
+        text-align: center;
+        text-shadow: #00000003 0px 0px 1px;
+    }
+
+    .bg-nau {
+        background-color: #6950cc;
+        padding: 62px 0px 52px;
+        text-align: center;
+    }
+
+        .bg-nau .footer {
+            display: none;
+        }
+
+        .bg-nau:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-image: url('https://aban.com.vn/wp-content/uploads/2023/03/texture.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: calc(368px / 2);
+            height: 371px;
+        }
+
+    .bg-nau-2:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background-image: url('https://aban.com.vn/wp-content/uploads/2023/03/texture-right.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: calc(368px / 2);
+        height: 371px;
+    }
+
+    .bg-nau h2 {
+        margin-bottom: 26px;
+        margin-top: 20px;
+        color: #ffe200;
+        font-family: SVN-Hydrella;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .bg-nau p {
+        color: #fff;
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 30px;
+        margin: 0px 0px 20px;
+        text-align: center;
+        padding: 0 65px;
+    }
+    .item_khongian {
+        position: relative;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .item-bg img{
+        width: 100%;
+    }
+    .imt-top {
+        height: 20px;
+        position: absolute;
+        top: -10px;
+        left: -5%;
+        width: 110%;
+    }
+    .imt-bottom {
+        height: 20px;
+        position: absolute;
+        bottom: -10px;
+        left: -5%;
+        width: 110%;
+    }
+
+    .imt-left {
+        width: 20px;
+        position: absolute;
+        left: -10px;
+        top: -5%;
+        height: 110%;
+    }
+    .imt-right {
+        width: 20px;
+        position: absolute;
+        right: -10px;
+        top: -5%;
+        height: 110%;
+    }
+    .slide-khonggian{
+    }
+    .booking-now {
+        background-image: url("https://aban.com.vn/wp-content/uploads/2023/04/Vectorsdf.svg");
+        background-position: 50% 50%;
+        background-size: 100% 100%;
+        color: #6950cc;
+        font-family: SVN-Hydrella;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+    }
+    .lienhe{
+        margin-top: 20px;
+    }
+    .lienhe ul{
+        padding: 0;
+        width: 70%;
+        margin-left: 15%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+        .lienhe i {
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            width: 40px;
+            /* border: 2px solid #b76f2c8c; */
+            font-size: 46px;
+            color: #6950cc;
+            border-radius: 10px;
+        }
+
+</style>
+<div class="main_slider">
+    @Html.Action("ViewSwiperMain1", "Swiper")
+
+</div>
+
+<div class="view1">
+    @Html.Action("View1", "Home");
+</div>
+
+<div class="banner">
+    <div class="container">
+        <div class="row d-flex justify-content-around text-center">
+            <div class="col-md-12 text-center mt-4 mb-4">
+                <div class="section_title">
+                    <h2>
+                        Về Ẩm Thực
+                    </h2>
+                    <div>
+                        <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+                    </div>
+                    <p class="mt-2 section_title_p">
+                        Chúng tôi không ngừng tìm tòi, nâng cấp, sáng tạo để thực đơn của mình trở nên phong phú, ngon miệng.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="new_arrivals">
+    <div class="container">
+        @Html.Action("MenuArrivals", "Menu")
+    </div>
+</div>
+
+<!-- Deal of the week -->
+
+<div class="posterr">
+    <div class="row" style="height: 100%;">
+        <div class="col-md-5" style="padding: 0;">
+            <div class="col-pos section_title_2">
+                <h2>"Nơi Gắn Kết Mái Ấm Gia Đình"</h2>
+                <div>
+                    <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+                </div>
+                <p>Còn gì bằng khi vào cuối tuần cả gia đình cũng nhau ngồi trước một mâm cơm truyền thống giữa thành phố nhộn nhịp và cũng tận hưởng hương vị quê hương mà Vân Đình mang lại.</p>
+                <p>Để phục vụ nhu cầu này, nhà hàng cung cấp các mâm cơm gia đình. Và chúng tôi tin rằng không chỉ là “ăn no, uống đủ”, bạn sẽ đi qua một hành trình thưởng ngoạn đầy ăn ý giữa hương vị và quê hương.” </p>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="col-pos-1 pos-slide-1 parallax-bg" style="background-image: url(Content/Assets/images/bg_homepage.jpg);">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="best_sellers" style="margin-top: 50px;"> 
+    <div class="container">
+        @Html.Action("SetOrderInHome", "Products")
+    </div>
+</div>
+
+<div class="container-fluid bg-nau">
+    <div class="row">
+        <div class="bg-nau-2">
+            <div>
+                <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+            </div>
+            <div>
+                <h2>“Gửi tới bạn những hương vị quê hương”</h2>
+            </div>
+            <div>
+                <p>Đừng lo lắng nếu bạn không thể tới trực tiếp nhà hàng trải nghiệm. Chúng tôi cung cấp dịch vụ giao đồ ăn tới địa chỉ, nếu bạn ở Hà Nội vậy ngại ngần gì hãy đặt cho một khoảng khắc qua trở về quê hương. Chúng tôi rất hân hạnh được phục vụ bạn trong thời gian ngắn nhất.</p>
+            </div>
+            <div class="container" style="margin-top: 50px;">
+                <div class="row benefit_row">
+                    <div class="col-lg-4 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>Miễn phí giao hàng</h6>
+                                <p>Giao hàng nội thành Hà Nội</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>Thanh toán trực tuyến</h6>
+                                <p>Hỗ trợ thanh toán trực tuyến khi đặt đồ ăn</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>Thời gian mở cửa</h6>
+                                <p>8AM - 09PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="banner">
+    <div class="container">
+        <div class="row d-flex justify-content-around text-center">
+            <div class="col-md-12 text-center mt-4 mb-4">
+                <div class="section_title">
+                    <h2>
+                        “Không gian Vân Đình”
+                    </h2>
+                    <div>
+                        <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+                    </div>
+                    <p class="mt-2 section_title_p">
+                        Tại Vân Đình, chúng tôi khao khát tái hiện không chỉ những món ngon của quê hương, mà cả không khí của núi rừng và những chuyến đi. Nguyên liệu tươi ngon được chọn lọc. Cách chế biến truyền thống của đồng bào, thêm vào đó là những sáng tạo riêng có trong quá trình trải nghiệm ẩm thực của Chef Việt. Tất cả làm nên tinh thần chỉ có tại Vân Đình – mà chúng tôi gọi là tinh thần Dân Tộc Đổi Mới.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    @Html.Action("ViewSwiperMain5", "Swiper");
+</div>
+
+<div class="container-fluid bg-nau">
+    <div class="row">
+        <div class="bg-nau-2">
+            <div>
+                <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+            </div>
+            <div>
+                <h2>“Nếu bạn quan tâm tới các sự kiện của Vân Đình”</h2>
+            </div>
+            <div>
+                <p>Dưới đây là một số sự kiện mà bạn nhất định không được bỏ lỡ.</p>
+            </div>
+            <div class="container" style="margin-top: 50px;">
+                <div class="row benefit_row">
+                    @Html.Action("GetData", "Blogs")
+                </div>
+            </div>
+            <div>
+                <p><a href="/bai-viet">Xem thêm</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Arrivals -->
+
+<div class="banner">
+    <div class="container">
+        <div class="row d-flex justify-content-around text-center">
+            <div class="col-md-12 text-center mt-4 mb-4">
+                <div class="section_title">
+                    <h2>
+                        Hãy tới với chúng tôi
+                    </h2>
+                    <div>
+                        <img decoding="async" width="43" height="14" src="https://aban.com.vn/wp-content/uploads/2023/03/777.svg" class="attachment-full size-full wp-image-511" alt="">
+                    </div>
+                    <p class="mt-2 section_title_p">
+                        Rất hân hạnh khi được phục vụ quý khách
+                    </p>
+                    <div class="booking-now">
+                        Đặt bàn ngay
+                    </div>
+                    <div class="lienhe">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

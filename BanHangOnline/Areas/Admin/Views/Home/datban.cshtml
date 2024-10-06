@@ -1,0 +1,208 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.OrderTable>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title height40px mr-4">Đơn đặt bàn</h3>
+                <div class="d-flex justify-content-between mb-2">
+                    <select id="pageSize2" class="form-control w-25">
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="all">All</option>
+                    </select>
+                    <div class="d-flex align-items-center">
+                        <button id="prevPage2" class="btn btn-primary mr-2" style="background-color: #fff; border-color: #000;"><i class="fa fa-arrow-left"></i></button>
+                        <span id="currentPage2" class="mx-2">1</span>
+                        <button id="nextPage2" class="btn btn-primary ml-2" style="background-color: #fff; border-color: #000;"><i class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="d-md-flex">
+                    <div class="flex-fill" style="overflow: hidden">
+                        <div id="world-map-markers">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Ngày tạo</th>
+                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Cập nhật</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyViewDetailOrder2">
+                                    @Html.Partial("_OrderTableDatBanPartial", Model)
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box mb-3 bg-warning pointer" id="dangchuanbi2">
+            <span class="info-box-icon"><i class="fas fa-utensils" style="color: #fff;" aria-hidden="true"></i></span>
+            <div class="info-box-content" style="color: #fff;">
+                <span class="info-box-text">Đang chuẩn bị</span>
+                <span class="info-box-number">@ViewBag.dangchuanbi</span>
+            </div>
+        </div>
+        <div class="info-box mb-3 bg-success pointer" id="danggiao2">
+            <span class="info-box-icon"><<i class="fa fa-truck" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Dang dien ra</span>
+                <span class="info-box-number">@ViewBag.danggiao</span>
+            </div>
+        </div>
+        <div class="info-box mb-3 bg-info pointer" id="thanhcong2">
+            <span class="info-box-icon"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Kết thúc</span>
+                <span class="info-box-number">@ViewBag.giaothanhcong</span>
+            </div>
+        </div>
+        <div class="info-box mb-3 bg-danger pointer" id="khongthanhcong2">
+            <span class="info-box-icon"><i class="fa fa-user-times" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Thất bại</span>
+                <span class="info-box-number">@ViewBag.giaothatbai</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var pageSize2 = 10;
+            var pageNumber2 = 1;
+            var currentStatus2 = null;
+
+            function toggleNextButton(itemsLength) {
+                if (itemsLength < pageSize2) {
+                    $('#nextPage2').attr('disabled', true);
+                } else {
+                    $('#nextPage2').attr('disabled', false);
+                }
+            }
+
+            function loadOrders2(status) {
+                var selectedPageSize = $('#pageSize2').val();
+                if (selectedPageSize === 'all') {
+                    pageSize2 = 0;
+                } else {
+                    pageSize2 = parseInt(selectedPageSize);
+                }
+
+                $.ajax({
+                    url: '@Url.Action("GetOrdersByStatusDatBan", "Home")',
+                    type: 'GET',
+                    data: { status: status, pageSize: pageSize2, pageNumber: pageNumber2 },
+                    success: function(result) {
+                        $('#bodyViewDetailOrder2').html(result);
+                        $('#currentPage2').text(pageNumber2);
+                        toggleNextButton(result.length);
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra!');
+                    }
+                });
+            }
+
+            function loadRecentOrders2() {
+                var selectedPageSize = $('#pageSize2').val();
+                if (selectedPageSize === 'all') {
+                    pageSize2 = 0;
+                } else {
+                    pageSize2 = parseInt(selectedPageSize);
+                }
+
+                $.ajax({
+                    url: '@Url.Action("GetRecentOrdersDatBan", "Home")',
+                    type: 'GET',
+                    data: { pageSize: pageSize2, pageNumber: pageNumber2 },
+                    success: function(result) {
+                        $('#bodyViewDetailOrder2').html(result);
+                        $('#currentPage2').text(pageNumber2);
+                        toggleNextButton(result.length);
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra!');
+                    }
+                });
+            }
+
+            $('#danggiao2').click(function() {
+                pageNumber2 = 1;  // Reset to first page
+                currentStatus2 = 0;
+                loadOrders2(currentStatus2);
+                $('.height40px').text("Đơn chuẩn bị");
+            });
+
+            $('#dangchuanbi2').click(function() {
+                pageNumber2 = 1;  // Reset to first page
+                currentStatus2 = -1;
+                loadOrders2(currentStatus2);
+                $('.height40px').text("Hôm nay");
+            });
+
+            $('#thanhcong2').click(function() {
+                pageNumber2 = 1;  // Reset to first page
+                currentStatus2 = 1;
+                loadOrders2(currentStatus2);
+                $('.height40px').text("Kết thúc");
+            });
+
+            $('#khongthanhcong').click(function() {
+                pageNumber2 = 1;  // Reset to first page
+                currentStatus2 = 2;
+                loadOrders2(currentStatus2);
+                $('.height40px').text("Thất bại");
+            });
+
+            $('#pageSize2').change(function() {
+                pageNumber2 = 1;  // Reset to first page
+                if (currentStatus2 !== null) {
+                    loadOrders2(currentStatus2);
+                } else {
+                    loadRecentOrders2();
+                }
+            });
+
+            $('#prevPage2').click(function() {
+                if (pageNumber2 > 1) {
+                    pageNumber2--;
+                    if (currentStatus2 !== null) {
+                        loadOrders2(currentStatus2);
+                    } else {
+                        loadRecentOrders2();
+                    }
+                }
+            });
+
+            $('#nextPage2').click(function() {
+                pageNumber2++;
+                if (currentStatus2 !== null) {
+                    loadOrders2(currentStatus2);
+                } else {
+                    loadRecentOrders2();
+                }
+            });
+
+            // Load initial data
+            loadRecentOrders2();
+
+            setInterval(function () {
+                if (currentStatus2 !== null) {
+                    loadOrders2(currentStatus2);
+                } else {
+                    loadRecentOrders2();
+                }
+            }, 60000);
+        });
+</script>

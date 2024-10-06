@@ -1,0 +1,82 @@
+﻿@model PagedList.PagedList<BanHangOnline.Models.EF.Product>
+@using PagedList.Mvc;
+@using PagedList; 
+
+
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="text-center">
+                <th>Mã sản phẩm</th>
+                <th>Hình ảnh </th>
+                <th>Tên sản phẩm</th>
+                <th style="width: 100px;">Số lượng</th>
+                <th style="width: 70px;">Thêm</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                var i = ((ViewBag.page - 1) * ViewBag.size) + 1;
+                foreach (var item in Model)
+                {
+                    <tr id="trow_@item.Id" style="line-height:50px; height: 50px;">
+                        <td class="text-center">@item.ProductCode</td>
+                        <td class="text-center"><img data-id="@item.Id" style="cursor:pointer;" class="imgproduct" height="50px" src="@item.Image" /></td>
+                        <td>@item.Title</td>
+                        <td>
+                            <div class="input-group mt-2">
+                                <input type="number" class="form-control" value="1" id="countProduct_@item.Id">
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" data-id="@item.Id" class="btn btn-primary btn-@item.Id" id="addProductAdmin"><i class="fas fa-plus"></i></button>
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">Không có bản ghi nào</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("body").on('click', "#addProductAdmin", function (e) {
+            debugger
+            var id = $(this).data("id");
+            var quatity = 1;
+            var sl = parseInt($("#countProduct_" + id).val());
+            if (sl != "" && sl > 0) {
+                var quantity = parseInt(sl);
+                $.ajax({
+                    url: '/order/addtocart',
+                    type: 'POST',
+                    data: { id: id, quantity: quantity, type: 1},
+                    success: function (rs) {
+                        if (rs.Success) {
+                            var classname = ".btn-" + id;
+                            location.href = location.origin + location.pathname + "?type=1"
+                            //$(classname).text("<i class='far fa-trash-alt'></i>");
+                        }
+                    }
+                })
+            } else {
+                alert("Lỗi số lượng!");
+            }
+            
+        })
+    })
+
+
+</script>

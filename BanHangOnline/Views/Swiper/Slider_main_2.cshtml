@@ -1,0 +1,156 @@
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+    .content-slider-2 {
+        cursor: pointer;
+        position: relative;
+        height: 100%;
+        margin-bottom: 100px;
+        text-align: justify;
+        transition: .5s;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+        .content-slider-2 h3 {
+            margin-top: 20px;
+            color: #fff;
+            letter-spacing: -1px;
+        }
+
+        .content-slider-2 p {
+            color: rgb(143, 143, 143);
+            letter-spacing: 0px;
+        }
+
+        .content-slider-2 strong {
+            margin-top: 150px;
+        }
+
+            .content-slider-2:hover > h3 {
+                color: #fff;
+            }
+
+            .content-slider-2:hover > p {
+                color: #fff;
+            }
+
+            .content-slider-2:hover > strong {
+                color: #fff;
+            }
+
+    .swiper-slide {
+        margin-top: 20px;
+        padding: 0px;
+    }
+
+    .swiper {
+        padding-right: 10px;
+        background-color: #fff;
+    }
+
+    .mySwiper_2{
+        height: 350px;
+    }
+
+    .swiper:hover > .swiper-button-next {
+        display: block;
+    }
+
+        .swiper:hover > .swiper-button-prev {
+            display: block;
+        }
+
+    .swiper-button-next {
+        display: none;
+        transition: .5s;
+        border-radius: 10px;
+    }
+
+    .swiper-button-prev {
+        display: none;
+        transition: .5s;
+        border-radius: 10px;
+    }
+
+    .swiper-button-next:hover {
+        transform: scale(1.5);
+        color: #fff;
+        background: linear-gradient(to bottom, #ff5050 0%, #ff3399 100%);
+    }
+
+    .swiper-button-prev:hover {
+        transform: scale(1.5);
+        color: #fff;
+        background: linear-gradient(to bottom, #ff5050 0%, #ff3399 100%);
+    }
+    .bg_color {
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+    }
+</style>
+
+<div class="container">
+    <div class="slider">
+        <div class="swiper mySwiper_2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="content-slider-2" style="background-image: url(Content/Assets/images/bg_homepage.jpg);">
+                        <div class="bg_color">
+                            <h3>Interaction Designer</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="red_button shop_now_button"><a href="#">order now</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content-slider-2" style="background-image: url(Content/Assets/images/bg_homepage.jpg);">
+                        <div class="bg_color">
+                            <h3>Interaction Designer</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="red_button shop_now_button"><a href="#">order now</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content-slider-2" style="background-image: url(Content/Assets/images/bg_homepage.jpg);">
+                        <div class="bg_color">
+                            <h3>Interaction Designer</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="red_button shop_now_button"><a href="#">order now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper_2", {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loop: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>

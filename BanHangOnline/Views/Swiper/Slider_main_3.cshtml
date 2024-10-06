@@ -1,0 +1,120 @@
+﻿
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+    .col-pos-1 {
+        width: 100%;
+    }
+
+    .slide-pos-1 {
+        width: 100%;
+        height: 600px;
+        /*margin-left: 5%;*/
+    }
+
+    .posterr {
+        width: 100%;
+        height: 600px;
+        /*text-align: center;*/
+        margin: 0px;
+        /*height: 600px;*/
+        overflow: hidden;
+    }
+
+    .col-pos {
+        padding-top: 40px;
+        /*justify-content: center;*/
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: block;
+        text-align: start;
+        padding-left: 30px;
+        /*padding-right: 30px;*/
+        padding-top: 40px;
+        color: #fff;
+        /*background-color: #fe4c50;*/
+        /*background: linear-gradient(to bottom, #ff3b3b 0%, #fd198b 100%);*/
+
+
+        border-color: #b76f2c;
+        border-width: 5px;
+        border-style: solid;
+    }
+
+    .col-pos img{
+       width: 100%;
+    }
+
+    .col-pos h3{
+        color: #fff;
+    }
+
+        .col-pos p {
+            color: #fff;
+        } 
+
+    .col-hr {
+        height: 3px;
+        width: 40%;
+        margin-right: 60%;
+        background-color: #fff;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .col-pos-1 {
+        padding-top: 100px;
+        width: 100%;
+        position: relative;
+        text-align: center;
+    }
+
+    .col-pos-1 h2{
+        color: #fff;
+    }
+
+    .mySwiper2{
+        background-color: #fff0;
+    }
+
+    .col-md-4{
+        padding: 0px;
+    }
+    .col-md-8 {
+        padding: 0px;
+    }
+    .parallax-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper2", {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>

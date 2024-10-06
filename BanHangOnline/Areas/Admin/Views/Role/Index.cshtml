@@ -1,0 +1,160 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+
+@model IEnumerable<IdentityRole>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/category" class="nav-link">Quyền</a>
+        </li>
+    </ul>
+}
+
+<section class="content pt-3">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Quản lý quyền</h3>
+
+            @*Nút hiển thị form thêm mới*@
+
+            <div class="card-tools">
+                <a href="/admin/role/create" data-toggle="modal" data-target="#modal-lg" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>
+            </div>
+            @*-----------*@
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="text-start">
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var id = 0;
+                        var i = 0;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.Id">
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger float-right btnDelete ml-2"><i class="far fa-trash-alt"></i></a>
+                                    <input type="hidden" data-id="@item.Id" id="IdOrder" />
+                                    @*Nút hiển thị form edit*@
+                                    <button type="button" data-id="@item.Id" class="btn btn-sm float-right btn-success btnUpdateRole " data-toggle="modal" data-target="#modal01-default">
+                                        <i class="fas fa-edit"></i> Cập nhật
+                                    </button>
+                                    @*---------------------*@
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có bản ghi nào</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.card -->
+
+
+    <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm mới quyền</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("Create", "Role")
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modal01-default">
+        <div class="modal-dialog modal01-default">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cập nhật quyền</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-body-edit">
+                    @Html.Action("Edit", "Role")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('body').on('click', '.btnDelete', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            $.ajax({
+                url: '/admin/role/delete/' + id,
+                type: 'POST',
+                success: function (rs) {
+                    if (rs) {
+                        alert("Xoa thanh cong");
+                        $('#trow_' + id).remove();
+                    }
+                }
+            });
+        });
+
+        $('body').on('click', '.btnUpdateRole', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            $("#IdOrder").val(id);
+        });
+
+        $('#modal01-default').on('show.bs.modal', function () {
+            
+            var idOrder = $("#IdOrder").val();
+            var url = '/admin/role/edit/' + idOrder;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $(".modal-body-edit").html(data);
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi tải dữ liệu đơn hàng.');
+                }
+            });
+        });
+
+    })
+</script>
+
+

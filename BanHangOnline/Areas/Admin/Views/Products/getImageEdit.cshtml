@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.ProductImage>
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-md-12 text-right mb-3 mr-4">
+            <input class="btn btn-primary" type="button" value="Tải ảnh" onclick="BrowseServer('txtImage')" />
+        </div>
+        <div class="col-md-12">
+            <table class="table table-hover" id="tb_AnhSanPham">
+                <thead>
+                    <tr class="text-center">
+                        <th>Ảnh</th>
+                        <th>Ảnh đại diện</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="renderImage">
+                    @foreach (var item in Model)
+                    {
+                        <tr id="trow_@item.Id" style="height:50px; line-height: 50px;" class="text-center">
+                            <td><img height="50" src="@item.Image" /><input type="hidden" value="@item.Image" name="Images" /></td>
+                            <td><input type="radio" name="rDefault" value="@item.Image" @(item.IsDefault ? "checked" : "") /></td>
+                            <td><a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnXoaAnh"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <input type="hidden" id="CurrentId" value="0" />
+        </div>
+    </div>
+}

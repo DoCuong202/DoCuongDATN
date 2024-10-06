@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.Product>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope="{ &quot;itemSelector&quot;: &quot;.product-item&quot;, &quot;layoutMode&quot;: &quot;fitRows&quot; }" style="position: relative; height: 720px;">
+                    @foreach (var item in Model)
+                    {
+                        if (item.Id != ViewBag.IdCurrent)
+                        {
+                            <!-- Product 1 -->
+                            <div class="product-item @item.ProductCategory.Alias" style="position: absolute; left: 345px; top: 360px;">
+                                <div class="product product_filter" style="border-right: 1px solid rgb(233, 233, 233);">
+                                    <div class="product_image">
+                                        <a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.Id">
+                                            <img src="@item.Image" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="favorite favorite_left"></div>
+                                    @if (item.IsSale)
+                                    {
+                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                    }
+                                    <div class="product_info">
+                                        <h6 class="product_name"><a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.Id">@item.Title</a></h6>
+                                        @if (item.PriceSale > 0)
+                                        {
+                                            <div class="product_price">@BanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0)đ<span>@BanHangOnline.Common.Common.FormatNumber(item.Price, 0)đ</span></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="product_price">@BanHangOnline.Common.Common.FormatNumber(item.Price, 0)đ</div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="red_button add_to_cart_button"><a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.Id" class="btnAddCart" data-id="@item.Id">Xem chi tiết</a></div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="tab">
+        Không tìm thấy sản phẩm liên quan
+    </div>
+}
+
+@section scripts{
+    <script src="~/Scripts/AddToCart.js"></script>
+    <script src="~/Content/Assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Content/Assets/plugins/toastr/toastr.min.js"></script>
+}
+

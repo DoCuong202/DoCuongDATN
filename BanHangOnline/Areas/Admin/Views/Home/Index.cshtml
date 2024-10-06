@@ -1,0 +1,573 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ admin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .solieu {
+        height: 60px;
+        color: #2c2c2c;
+        display: flex;
+        font-size: 36px;
+        font-weight: 700;
+        /*line-height: 21px;*/
+        min-height: 60px;
+    }
+
+    .tensolieu {
+        height: 30px;
+        color: #4b4b4b;
+        display: flex;
+        font-size: 16px;
+        font-weight: 700;
+        gap: 10px;
+        line-height: 30px;
+    }
+
+    .soduong {
+        background-color: #cef8e0;
+        border-radius: 5px;
+        color: #15a46e;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 30px;
+        padding: 0px 5px;
+    }
+
+    .soam {
+        background-color: #ffebe7;
+        border-radius: 5px;
+        color: #f75c46;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 30px;
+        padding: 0px 5px;
+    }
+
+    .box-boloc {
+        /*margin-top: 24px;*/
+    }
+
+    .boloc {
+        width: 200px;
+    }
+
+    .tenboloc {
+        height: 42px;
+        line-height: 42px;
+        align-items: center;
+        border-radius: 3.5px;
+        font-size: 18px;
+        font-weight: 700;
+        gap: 8.75px;
+        padding: 0px 17.5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .tenboloc:hover {
+            background-color: #f5f5f5;
+        }
+
+    .select-time {
+        height: 42px;
+    }
+
+        .select-time option {
+            height: 42px;
+        }
+
+    #chart-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .Legend_legend__h9a1F {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        /*padding: 20px 0;*/
+    }
+
+    .Legend_label__HSSWz {
+        display: flex;
+        align-items: center;
+        font-size: var(--font-size-sm);
+        cursor: pointer;
+    }
+
+    .StatusLight-statuslight--ZDk4M {
+        align-items: center;
+        display: inline-flex;
+        gap: 12px;
+    }
+
+    .StatusLight-bg--ZWIyN, .StatusLight-status--MWUyY {
+        background: #fff;
+        border-radius: 100%;
+        height: 10px;
+        position: relative;
+        width: 10px;
+    }
+
+    .Legend_label__HSSWz + .Legend_label__HSSWz {
+        margin-inline-start: 20px;
+    }
+
+    .box-dulieu {
+        /*border-top: 1px solid #bebebe;*/
+        width: 100%;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-left: 20px;
+        height: 480px;
+    }
+
+    .colum-1 {
+        height: 40px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .title-colum {
+        color: #2c2c2c;
+        display: flex;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 40px;
+    }
+
+    .colum-2 {
+        height: 30px;
+        line-height: 30px;
+        display: flex;
+        width: 100%;
+        padding-left: 15px;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+        .colum-2:hover {
+            background-color: rgb(242 242 242);
+        }
+
+    .colum-2-title {
+        /*width: 85%;*/
+        overflow: hidden;
+        margin-right: 30px;
+    }
+
+    .colum-2-percent {
+        /*width: 15%;*/
+        display: flex;
+    }
+
+    .percent {
+        border-left: 1px solid #4b4b4b;
+        width: 100%;
+        padding-inline-start: 10px;
+        padding-inline-end: 10px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .bkcolor-percent {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 30px;
+        opacity: .1;
+        z-index: -1;
+        background-color: #147af3;
+    }
+
+    .percent-item {
+        display: flex;
+        width: 100%;
+    }
+
+    .percent-item-1 {
+        width: 25px;
+        text-align: center;
+    }
+
+    .percent-item-2 {
+        width: 70px;
+    }
+
+    .percent-item-1-title {
+        line-height: 30px !important;
+    }
+
+    .no-padding {
+        padding: 0px;
+    }
+
+    .border-right {
+        border-left: 1px solid #bebebe;
+        padding-left: 20px;
+        padding-right: 0px !important;
+    }
+
+    .border-topTK {
+        border-top: 1px solid #bebebe;
+    }
+
+    .title-item {
+        display: flex;
+    }
+
+        .title-item p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
+
+        .title-item i {
+            font-size: 14px;
+            margin-top: 8px;
+            margin-left: 12px;
+            cursor: pointer;
+            color: #4b4b4b;
+        }
+
+        .title-item img {
+            margin-right: 6px;
+            margin-bottom: 3px;
+            max-width: 17px;
+        }
+
+    .colum-2 p:hover {
+        color: #2680eb99;
+    }
+
+    .title-item i:hover {
+        color: #2680eb99;
+    }
+
+    .pt-30px {
+        padding-top: 30px;
+    }
+
+    #main {
+        height: 500px !important;
+    }
+
+        #main canvas {
+            /*        width: 1230px !important;
+        left: -30px !important;
+        z-index: -1;*/
+            height: 500px !important;
+        }
+
+    .option-selected {
+        height: 40px;
+        border-radius: 5px;
+        border: 1px solid #bebebe;
+        text-align: start;
+        padding-left: 15px;
+        display: flex;
+        justify-content: space-between;
+        line-height: 40px;
+        cursor: pointer;
+        padding-right: 15px;
+        align-items: center;
+    }
+
+        .option-selected p {
+            height: 40px;
+            text-align: start;
+            line-height: 40px;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+        }
+
+    .option-boloc {
+        position: relative;
+    }
+
+    .option {
+        position: absolute;
+        top: 43px;
+        left: 0;
+        height: 80px;
+        width: 100%;
+        border: 1px solid #bebebe;
+        border-radius: 5px;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #fff;
+    }
+
+    .option-tuan {
+        line-height: 40px;
+        border-bottom: 1px solid #bebebe;
+        text-align: start;
+        padding-left: 15px;
+        cursor: pointer;
+    }
+
+        .option-tuan:hover {
+            background-color: #fafafa;
+        }
+
+    .option-nam {
+        line-height: 40px;
+        text-align: start;
+        padding-left: 15px;
+        cursor: pointer;
+    }
+
+        .option-nam:hover {
+            background-color: #fafafa;
+        }
+
+    p, li, a, span {
+        font-family: Texturina;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 31px;
+        /*color: #262626;*/
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: Texturina;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .info-box .info-box-text {
+        display: flex !important;
+    }
+
+    .info-box .info-box-text p{
+        margin-left: 5px;
+    }
+</style>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thống kê</h1>
+            </div>
+            <div class="col-sm-6">
+                @*<ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                </ol>*@
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1" style="background: #17a2b8 !important;"><i class="fas fa-shopping-cart"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tổng sản phẩm</span>
+                        <span class="info-box-text">@ViewBag.countProduct <p>sản phẩm</p></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1" style="background-color: #661aff !important;"><i class="fa fa-book" style="color: #fff;"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tổng bài viết</span>
+                        <span class="info-box-text">@ViewBag.countPost <p>bài viết</p></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-user-plus"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tổng tài khoản</span>
+                        <span class="info-box-text">@ViewBag.countProduct <p>tài khoản</p></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-bar-chart" style="color: #fff;" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tổng lượt truy cập</span>
+                        <span class="info-box-text">@ViewBag.countPost <p>lượt</p></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        @Html.Action("datgiao", "Home")
+
+        @Html.Action("GetSoLuongTheoNamThang", "Home")
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lượt xem bài viết</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="d-md-flex">
+                            <div class="box-dulieu">
+                                <div class="tuan">
+                                    <div class="colum-2">
+                                        <div class="colum-2-title">
+                                            <div class="title-item">
+                                                <p>bài viết 1</p>
+                                                <a target="_blank" href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="colum-2-percent">
+                                            <div class="percent-item">
+                                                <div class="percent-item-1">
+                                                    <div class="title-colum percent-item-1-title">
+                                                        <p>200</p>
+                                                    </div>
+                                                </div>
+                                                <div class="percent-item-2">
+                                                    <div class="percent">
+                                                        <div class="bkcolor-percent" style="width: 100%"></div>
+                                                        <span>100%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.d-md-flex -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            @Html.Action("MonAn", "Home")
+            <!-- /.row -->
+        </div><!--/. container-fluid -->
+        <!-- Main content -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-family: Texturina; font-size: 30px; font-weight: 300;">Cập nhật trạng thái</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-3">
+                    <select id="statusSelect" style="font-family: Texturina; font-size: 20px; font-weight: 300;" class="form-control" aria-label="Default select example">
+                        <option selected>Chọn trạng thái</option>
+                        <option value="-1">Đang chuẩn bị</option>
+                        <option value="0">Đang giao</option>
+                        <option value="1">Giao thành công</option>
+                        <option value="2">Giao thất bại</option>
+                    </select>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdateStatus" data-dismiss="modal">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body body-detail">
+                    @Html.Action("Detail2", "Order")
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="modal fade" id="modal-defaultDatBan">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-family: Texturina; font-size: 30px; font-weight: 300;">Cập nhật trạng thái</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-3">
+                    <select id="statusSelectDatBan" style="font-family: Texturina; font-size: 20px; font-weight: 300;" class="form-control" aria-label="Default select example">
+                        <option selected>Chọn trạng thái</option>
+                        <option value="-1">Đang chuẩn bị</option>
+                        <option value="0">Đang diễn ra</option>
+                        <option value="1">Kết thúc</option>
+                        <option value="2">Thất bại</option>
+                    </select>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdateStatusDatBan" data-dismiss="modal">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-xlDatBan">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body body-detail">
+                    @Html.Action("Detail2", "OrderTable")
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

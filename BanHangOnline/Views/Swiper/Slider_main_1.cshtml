@@ -1,0 +1,107 @@
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="~/Content/Assets/styles/main_styles.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .swiper {
+        width: 100%;
+        height: 100%;
+        background: #000;
+    }
+
+    .swiper-slide {
+        font-size: 18px;
+        color: #fff;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 40px 60px;
+    }
+
+    .parallax-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 130%;
+        height: 100%;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .main_slider_content {
+        color: #fff;
+    }
+
+    .fontHead {
+        font-family: SVN-Hydrella !important;
+    }
+</style>
+
+
+<div class="swiper mySwiper">
+    <div class="parallax-bg" style="background-image: url(Content/Assets/images/bg_homepage.jpg);" data-swiper-parallax="-23%"></div>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <div class="container fill_height">
+                <div class="row align-items-center fill_height">
+                    <div class="col">
+                        <div class="main_slider_content fontHead">
+                            @*<h6>Spring / Summer Collection 2017</h6>*@
+                            <h1>Hương vị quê nhà</h1>
+                            <h3 style="color: #fff;">| Đậm đà từng món</h3>
+                            <div class="red_button shop_now_button"><a href="http://doan.vn/dat-ban">Đặt bàn ngay</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="container fill_height">
+                <div class="row align-items-center fill_height">
+                    <div class="col">
+                        <div class="main_slider_content fontHead">
+                            <h1>Nơi lưu giữ kĩ niệm</h1>
+                            <h3 style="color: #fff;">| Nhà hàng Vân Đình</h3>
+                            <div class="red_button shop_now_button"><a href="http://doan.vn/dat-ban">Đặt bàn ngay</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="swiper-slide">
+            <div class="container fill_height">
+                <div class="row align-items-center fill_height">
+                    <div class="col">
+                        <div class="main_slider_content">
+                            <h6>Spring / Summer Collection 2017</h6>
+                            <h1>Get up to 30% Off New Arrivals</h1>
+                            <div class="red_button shop_now_button"><a href="#">order now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        speed: 600,
+        parallax: true,
+        centeredSlides: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>

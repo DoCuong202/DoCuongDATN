@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model IdentityRole
+
+@using (Html.BeginForm("Create", "Role", FormMethod.Post, new { }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+    <div class="bs-stepper-content">
+        <!-- your steps content here -->
+        <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Tên</label>
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Nhập tên" })
+            </div>
+        </div>
+        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+            <button type="submit" class="btn btn-primary">Thêm</button>
+        </div>
+    </div>
+}
+

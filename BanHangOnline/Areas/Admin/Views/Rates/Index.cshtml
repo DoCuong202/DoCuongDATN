@@ -1,0 +1,265 @@
+﻿@model PagedList.PagedList<BanHangOnline.Models.EF.Rate>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Danh sách đánh giá";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/rates" class="nav-link">Đánh giá</a>
+        </li>
+    </ul>
+}
+<section class="content pt-3">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách dánh giá</h3>
+            <div class="card-tools">
+                <a href="/admin/rates/add" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>
+                @*<a href="" class="btn btn-danger" id="btnDeleteAll"><i class="far fa-trash-alt"></i></a>*@
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    @using (Html.BeginForm("index", "Rates", FormMethod.Get, new { }))
+                    {
+                        <div class="input-group mb-3">
+                            @Html.TextBox("searchText", ViewBag.searchText as string, new { @class = "form-control", placeholder = "Nhập từ khóa tìm kiếm" })
+                            <select name="starRateFilter" class="form-control">
+                                <option value="">Chọn số sao</option>
+                                <option value="1" @(ViewBag.starRateFilter != null && ViewBag.starRateFilter == 1 ? "selected" : "")>1 sao</option>
+                                <option value="2" @(ViewBag.starRateFilter != null && ViewBag.starRateFilter == 2 ? "selected" : "")>2 sao</option>
+                                <option value="3" @(ViewBag.starRateFilter != null && ViewBag.starRateFilter == 3 ? "selected" : "")>3 sao</option>
+                                <option value="4" @(ViewBag.starRateFilter != null && ViewBag.starRateFilter == 4 ? "selected" : "")>4 sao</option>
+                                <option value="5" @(ViewBag.starRateFilter != null && ViewBag.starRateFilter == 5 ? "selected" : "")>5 sao</option>
+                            </select>
+                            <button type="submit" class="btn btn-info mx-4"><i class="fas fa-search"></i> Tìm kiếm</button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th style="width: 50px;">
+                            <input type="checkbox" id="SelectAll" />
+                        </th>
+                        <th style="width: 70px;">STT</th>
+                        <th style="width: 170px;">Mã sản phẩm</th>
+                        <th>Nội dung</th>
+                        <th style="width: 100px;">Ngày tạo</th>
+                        <th style="width: 170px;">Mức đánh giá(*)</th>
+                        <th style="width: 150px;">Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = ((ViewBag.page - 1) * ViewBag.size) + 1;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.Id">
+                                <td class="text-center" style="width: 50px;"><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+                                <td class="text-center">@i</td>
+                                <td class="text-center">@item.IdProduct</td>
+                                <td class="text-center">@item.ContentRate</td>
+                                <td class="text-center">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center">@item.StartRate</td>
+                                <td>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-info btnUpdatestatusOrder" data-toggle="modal" data-target="#modal-defaultRates"><i class="fas fa-eye"></i></a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete"><i class="far fa-trash-alt"></i></a>
+                                    <a href="#" data-id="@item.IdProduct" class="btn btn-sm btn-primary btnOpen"><i class="fas fa-external-link-alt"></i></a>
+                                </td>
+                            </tr>
+
+                            
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có bản ghi nào</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+</section>
+<input type="hidden" data-id="" id="IdOrder" />
+<div class="modal fade" id="modal-defaultRates">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="font-family: Texturina; font-size: 30px; font-weight: 300;">Chi tiết đánh giá</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-3">
+                <span class="user">Tài khoản: </span><br />
+                <span class="product">Sản phẩm: </span><br />
+                <span class="time">Thời gian: </span><br />
+                <span class="star">Star: </span><br />
+                <span class="contentrates">Nội dung: </span><br />
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                @*<button type="button" class="btn btn-primary" id="btnUpdateStatus" data-dismiss="modal">Lưu</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            let timestampString = "/Date(1715522348177)/";
+
+            // Extract the timestamp value
+            
+
+            function formatDate(date) {
+                let day = date.getDate().toString().padStart(2, '0');
+                let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+                let year = date.getFullYear();
+                let hours = date.getHours().toString().padStart(2, '0');
+                let minutes = date.getMinutes().toString().padStart(2, '0');
+                let seconds = date.getSeconds().toString().padStart(2, '0');
+                return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+            }
+
+
+
+
+            $(".btnUpdatestatusOrder").click(function () {
+                selectedRowId = $(this).data("id");
+                var url = '/admin/rates/detail';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: { id: selectedRowId },
+                    success: function (data) {
+                        $('.user').text('Tài khoản: ' + data.username);
+                        $('.product').text('Sản phẩm: ' + data.product);
+
+                        let timestampString = data.time;
+                        let timestamp = parseInt(timestampString.match(/\d+/)[0]);
+                        let date = new Date(timestamp);
+
+                        $('.time').text('Thời gian: ' + formatDate(date));
+                        $('.star').text('Star: ' + data.sao);
+                        $('.contentrates').text('Nội dung: ' + data.nd);
+                    },
+                });
+            });
+
+
+
+            $('body').on('click', '.btnSeeMore', function () {
+                // Chuyển hướng đến trang mới
+                var dataId = $(this).data("id");
+                location.href = location.origin + "/chi-tiet-san-pham/" + dataId;
+            })
+
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm("Bạn chắc chắn xóa");
+                if (conf === true) {
+                    $.ajax({
+                        url: '/admin/rates/delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                            location.reload();
+                        }
+                    })
+                }
+            });
+
+            $('body').on('click', '.btnOpen', function () {
+                var id = $(this).data("id");
+                $.ajax({
+                    url: '/admin/rates/open',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            location.href = location.origin + rs.message;
+                        } else {
+                            var conf = confirm(rs.message);
+                        }
+                    }
+                })
+            });
+
+            $('body').on('change', '#SelectAll', function () {
+                var checkStatus = this.checked;
+                var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
+                checkbox.each(function () {
+                    this.checked = checkStatus;
+                    if (this.checked) {
+                        checkbox.attr('selected', 'checked');
+                    } else {
+                        checkbox.attr('selected', '');
+                    }
+                })
+            })
+
+            $('body').on('click', '#btnDeleteAll', function (e) {
+                e.preventDefault();
+                var str = "";
+                var checkbox = $(this).parents('.card').find('tr td input:checkbox');
+                var i = 0;
+                checkbox.each(function () {
+                    if (this.checked) {
+                        checkbox.attr('selected', 'checked');
+                        var id = $(this).val();
+                        if (i === 0) {
+                            str += id;
+                        } else {
+                            str += "," + id;
+                        }
+                        i++;
+                    } else {
+                        checkbox.attr('selected', '');
+                    }
+                })
+                if (str.length > 0) {
+                    var conf = confirm("Bạn có muốn xóa các bản ghi này hay không?");
+                    if (conf === true) {
+                        $.ajax({
+                            url: '/admin/rates/deleteAll',
+                            type: 'POST',
+                            data: { ids: str },
+                            success: function (rs) {
+                                if (rs.success) {
+                                    location.reload();
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+}
+

@@ -1,0 +1,55 @@
+﻿@model BanHangOnline.Models.EF.Order
+@*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">*@
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<a href="~/Content/bootstrap.min.css.map"></a>
+
+<div class="modal fade" id="modal1-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cập nhật trạng thái</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-3">
+                <select id="statusSelect" class="form-select" aria-label="Default select example">
+                    <option selected>--Chọn trạng thái--</option>
+                    <option value="-1">Đang chuẩn bị</option>
+                    <option value="0">Đang giao</option>
+                    <option value="1">Giao thành công</option>
+                </select>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnUpdateStatus">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btnUpdatestatusOrder").click(function () {
+            var id = $(this).data("id");
+            $("#IdOrder").val(id);
+        })
+
+        $("#btnUpdateStatus").click(function () {
+            var selectedValue = $("#statusSelect").val();
+            var idOrder = $("#IdOrder").val();
+            $.ajax({
+                url: '/admin/order/update',
+                type: 'POST',
+                data: { id : idOrder, statusOrder: selectedValue },
+                success: function (result) {
+                    alert(result.message);
+                },
+                error: function (error) {
+                    console.error("Ajax request failed: ", error);
+                }
+            });
+        });
+    })
+</script>

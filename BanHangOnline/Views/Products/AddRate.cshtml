@@ -1,0 +1,158 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@{
+    var userManager = new UserManager<BanHangOnline.Models.ApplicationUser>(new UserStore<BanHangOnline.Models.ApplicationUser>(new BanHangOnline.Models.ApplicationDbContext()));
+    var currentUser = userManager.FindById(User.Identity.GetUserId());
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+@*<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">*@
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_responsive.css">
+<link rel="stylesheet" href="~/Content/Assets/plugins/fontawesome-free/css/all.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/Content/Assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+
+<div class="add_review">
+    @if (Request.IsAuthenticated)
+    {
+        <form id="review_form" action="post">
+            <h1>Đánh giá của bạn:</h1>
+            <ul class="user_star_rating">
+                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+            </ul>
+            <input value="@currentUser.Fullname" type="hidden" id="review_fullname" />
+            <input value="@ViewBag.IdProduct" type="hidden" id="review_IdProduct" />
+
+            <textarea id="review_message" class="input_review" name="message" placeholder="Nhập đánh giá" rows="4" required="" data-error="Please, leave us a review."></textarea>
+            <div class="alert alert-danger alert-dismissible mt-2 mb-2" id="alert-danger">
+                @*<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>*@
+                <h5><i class="icon fas fa-ban"></i> Cảnh báo!</h5>
+                Bạn đang sử dụng các từ ngữ nhạy cảm trong đánh giá. Vui lòng kiểm tra lại trước khi gửi đánh giá!
+            </div>
+            <div class="text-left text-sm-right mt-3">
+                <button id="review_submit" type="button" class="red_button review_submit_btn trans_300" value="Submit">Gửi</button>
+            </div>
+        </form>
+
+
+    }
+    else
+    {
+        <div class="alert alert-info alert-dismissible">
+            @*<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>*@
+            <h5><i class="icon fas fa-info"></i> Thông báo!</h5>
+            Đăng nhập để đánh giá
+        </div>
+    }
+
+</div>
+
+@section scripts{
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/js/single_custom.js"></script>
+    <script src="~/Content/Assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Content/Assets/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Scripts/AddToCart.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+}
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+<script>
+    $(document).ready(function () {
+        var startRate = 5;
+        $("#alert-danger").hide();
+
+        if ($('.user_star_rating li').length) {
+            var stars = $('.user_star_rating li');
+
+            stars.each(function () {
+                var star = $(this);
+
+                star.on('click', function () {
+                    var i = star.index();
+
+                    // Cập nhật giá trị số sao được chọn
+                    startRate = i + 1;
+
+                    // Gỡ bỏ và thêm các class cho sao
+                    stars.find('i').removeClass('fa-star').addClass('fa-star-o');
+
+                    for (var x = 0; x <= i; x++) {
+                        $(stars[x]).find('i').removeClass('fa-star-o').addClass('fa-star');
+                    }
+                });
+            });
+        }
+
+        $('body').on('click', '#review_submit', function () {
+            var content = $("#review_message").val();
+            var NameUser = $("#review_fullname").val();
+            var IdProduct = $("#review_IdProduct").val();
+
+            var sensitiveWords = ["test1", "test2", "test3"];
+            $("#alert-danger").hide();
+
+            var hasSensitiveWord = false;
+            for (var i = 0; i < sensitiveWords.length; i++) {
+                if (content.toLowerCase().includes(sensitiveWords[i])) {
+                    hasSensitiveWord = true;
+                    break;
+                }
+            }
+
+            if (hasSensitiveWord) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Thêm đánh giá thất bại do vi phạm ngôn ngữ.'
+                })
+                $("#alert-danger").show();
+            } else {
+                $.ajax({
+                    url: '/Products/SubmitAddRate',
+                    type: 'POST',
+                    data: { IdProduct: IdProduct, NameUser: NameUser, content: content, startRate: startRate },
+                    success: function (rs) {
+                        if (rs.success == true) {
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Thêm đánh giá thành công.'
+                            })
+                            $("#review_message").val("");
+                            $("#review_fullname").val("");
+                            $("#review_IdProduct").val("");
+                            $("#alert-danger").hide();
+                        }
+                    }
+                })
+            }
+            
+        });
+
+        $('#review_submit').click(function () {
+            location.reload(); // Reload trang
+        });
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    })
+
+</script>
+

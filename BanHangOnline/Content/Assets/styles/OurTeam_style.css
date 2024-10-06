@@ -1,0 +1,136 @@
+﻿@-webkit-keyframes xoayvong {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}
+
+
+
+/*------------------------------------PROCESS__________________*/
+
+
+
+.proocess {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    position: relative;
+}
+
+.proo-rotate {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    /* transform: translate(-50%, -50%); */
+    width: 80%;
+    height: 80%;
+    animation: xoayvong 10s linear 0s infinite;
+    -webkit-animation: xoayvong 10s linear 0s infinite;
+    -moz-animation: xoayvong 10s linear 0s infinite;
+    -o-animation: xoayvong 10s linear 0s infinite;
+}
+
+    .proo-rotate img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+    }
+
+/*.man-1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}*/
+
+.col-proocess-1 img {
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rotate-1 {
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    background-color: #fd198b;
+}
+
+.rotate-2 {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    background-color: #fddb19;
+}
+
+.rotate-3 {
+    position: absolute;
+    top: 70%;
+    left: 70%;
+    background-color: #1956fd;
+}
+
+.rotate-4 {
+    position: absolute;
+    top: 70%;
+    left: 15%;
+    background-color: #fd6d19;
+}
+
+.rotate-5 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    background-color: #fd19f2;
+}
+
+.rotate-6 {
+    position: absolute;
+    top: 80%;
+    left: 55%;
+    background-color: #19fdd7;
+}
+
+.rotate-7 {
+    position: absolute;
+    top: 10%;
+    left: 75%;
+    background-color: #19fd3f;
+}
+
+.rotate-8 {
+    position: absolute;
+    top: 30%;
+    left: 75%;
+    background-color: #ff5f5f;
+}
+
+
+.proocess-1-word {
+    margin-top: 40px;
+}
+
+    .proocess-1-word h5 {
+        font-weight: 700;
+    }
+
+    .proocess-1-word p {
+        font-size: 15px;
+        color: rgb(78, 78, 78);
+    }
+
+

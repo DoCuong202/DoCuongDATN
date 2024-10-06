@@ -1,0 +1,310 @@
+﻿@model BanHangOnline.Models.EF.Order
+@{
+    ViewBag.Title = "Thêm sản don hang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/order" class="nav-link">Đơn hàng</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Thêm mới đơn hàng</a>
+        </li>
+    </ul>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm mới đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Đơn hàng</li>
+                    <li class="breadcrumb-item active">Thêm mới đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+@if (Model != null)
+{
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin thêm mới đơn hàng</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Sản phẩm</a></li>
+                                    <li class="nav-item"><a class="nav-link " href="#activity" data-toggle="tab">Thông tin chung</a></li>
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="timeline">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    @Html.Action("CartInOrder", "Order")
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        @using (Html.BeginForm("getProductInAdmin", "Products", FormMethod.Get, new { }))
+                                                        {
+                                                            <div class="input-group mb-3">
+                                                                @Html.TextBox("searchText", null, new { @class = "form-control", placeholder = "Nhập từ khóa tìm kiếm" })
+                                                                <button type="submit" class="btn btn-info mx-4"><i class="fas fa-search"></i> Tìm kiếm</button>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="col-12">
+                                                        @Html.Action("getProductInAdmin", "Products")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane " id="activity">
+                                        <div class="form-group">
+                                            <label for="customername">Họ tên khách hàng</label>
+                                            <input type="email" value="@Model.CustomerName" class="form-control" id="customername" placeholder="Nhập họ tên">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Số điện thoại</label>
+                                            <input type="email" value="@Model.Phone" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Địa chỉ</label>
+                                            <input type="email" value="@Model.Address" class="form-control" id="address" placeholder="Nhận địa chỉ">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="note">Ghi chú</label>
+                                            <input type="email" value="@Model.note" class="form-control" id="note" placeholder="Nhập ghi chú">
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+
+                                </div>
+                                <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+                                    <a class="btn btn-danger" href="/admin/order"><i class="fas fa-undo"></i></a>
+                                    <button type="submit" id="submit-add" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+        <input type="hidden" value="@Model.Id" id="IDOrder" />
+    </section>
+}
+else
+{
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin thêm mới đơn hàng</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Sản phẩm</a></li>
+                                    <li class="nav-item"><a class="nav-link " href="#activity" data-toggle="tab">Thông tin chung</a></li>
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="timeline">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    @Html.Action("CartInOrder", "Order")
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        @using (Html.BeginForm("getProductInAdmin", "Products", FormMethod.Get, new { }))
+                                                        {
+                                                            <div class="input-group mb-3">
+                                                                @Html.TextBox("searchText", null, new { @class = "form-control", placeholder = "Nhập từ khóa tìm kiếm" })
+                                                                <button type="submit" class="btn btn-info mx-4"><i class="fas fa-search"></i> Tìm kiếm</button>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="col-12">
+                                                        @Html.Action("getProductInAdmin", "Products")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane " id="activity">
+                                        <div class="form-group">
+                                            <label for="customername">Họ tên khách hàng</label>
+                                            <input type="email" class="form-control" id="customername" placeholder="Nhập họ tên">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Số điện thoại</label>
+                                            <input type="email" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Địa chỉ</label>
+                                            <input type="email" class="form-control" id="address" placeholder="Nhận địa chỉ">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="note">Ghi chú</label>
+                                            <input type="email" class="form-control" id="note" placeholder="Nhập ghi chú">
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+
+                                </div>
+                                <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+                                    <a class="btn btn-danger" href="/admin/order"><i class="fas fa-undo"></i></a>
+                                    <button type="submit" id="submit-add" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </section>
+}
+
+<!-- Main content -->
+
+<script>
+    $(document).ready(function () {
+        $("body").on('click', "#submit-add", function (e) {
+            var customername = $("#customername").val();
+            var phone = $("#phone").val();
+            var address = $("#address").val();
+            var note = $("#note").val();
+            var id = $("#IDOrder").val();
+
+            $.ajax({
+                url: '/order/add',
+                type: 'POST',
+                data: { customername: customername, phone: phone, address: address, note: note, id : id },
+                success: function (rs) {
+                    if (rs.success) {
+                        location.href = location.origin + "/admin/order/index";
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            })
+
+            //$("body").on('click', "#submit-add", function (e) {
+            //    debugger
+            //    var customername = $("#customername").val();
+            //    var phone = $("#phone").val();
+            //    var address = $("#address").val();
+            //    var note = $("#note").val();
+
+            //    $.ajax({
+            //        url: '/order/add',
+            //        type: 'POST',
+            //        data: { customername: customername, phone: phone, address: address, note: note },
+            //        success: function (rs) {
+            //            if (rs.Success) {
+
+            //            }
+            //        }
+            //    })
+            //})
+
+            $('body').on('click', '.btnXoaAnh', function () {
+                var conf = confirm("Bạn có muốn xóa ảnh này không?");
+                if (conf === true) {
+                    var _id = $(this).data("id");
+                    $("#trow_" + _id).fadeTo('fast', 0.3, function () {
+                        $(this).remove();
+                    })
+                    var current = $("#CurrentId").val();
+                    var currentId = parseInt(current) - 1;
+                    $("#CurrentId").val(currentId);
+                }
+            })
+
+        })
+        function BrowseServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                addImageProduct(fileUrl);
+            };
+            finder.popup();
+        }
+        function addImageProduct(url) {
+            var current = $("#CurrentId").val();
+            var currentId = parseInt(current) + 1;
+            if (currentId < 5) {
+                var str = "";
+                if (currentId == 1) {
+                    str += `
+                               <tr id="trow_${currentId}" style="height:50px; line-height: 50px;" class="text-center">
+                                   <td>${currentId}</td>
+                                   <td><img height="50" src="${url}" /><input type="hidden" value="${url}" name="Images" /></td>
+                                   <td><input type="radio" name="rDefault" value="${currentId}" checked="checked"/></td>
+                                   <td><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh" >Xóa</a></td>
+                               </tr>
+                        `
+                } else {
+                    str += `
+                               <tr id="trow_${currentId}" style="height:50px; line-height: 50px;" class="text-center">
+                                   <td>${currentId}</td>
+                                   <td><img height="50" src="${url}" /><input type="hidden" value="${url}" name="Images" /></td>
+                                   <td><input type="radio" name="rDefault" value="${currentId}"  /></td>
+                                   <td><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh" >Xóa</a></td>
+                               </tr>
+                        `
+                }
+
+                $("#renderImage").append(str);
+                $("#CurrentId").val(currentId);
+            }
+            else {
+                alert("Vui lòng không thêm quá 4 ảnh")
+            }
+        }
+
+
+
+    </script>
+}
+

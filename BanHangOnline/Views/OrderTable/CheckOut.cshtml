@@ -1,0 +1,304 @@
+﻿@model IEnumerable<BanHangOnline.Models.ShoppingCartItem>
+@using BanHangOnline.Common
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+@{
+    var userManager = new UserManager<BanHangOnline.Models.ApplicationUser>(new UserStore<BanHangOnline.Models.ApplicationUser>(new BanHangOnline.Models.ApplicationDbContext()));
+    var currentUser = userManager.FindById(User.Identity.GetUserId());
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Content/Assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Content/clients/dist/css/adminlte.min.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/bootstrap4/bootstrap.min.css">
+<link href="~/Content/Assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="~/Content/Assets/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_responsive.css">
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<style>
+    .giohang {
+        margin-top: 170px;
+    }
+
+    .selector_in_cart {
+        margin: 0 !important;
+    }
+
+    .card-title.checkout-title {
+        color: white !important;
+    }
+    h1, h2, h3, h4, h5 {
+        font-family: Texturina !important;
+    }
+
+    p {
+        font-family: Texturina !important;
+        font-size: 20px !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    /*    li a {
+        font-family: Texturina !important;
+        font-size: 17px !important;
+    }*/
+
+    tr td {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    tr th {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    label {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    b, strong {
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+    address {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+</style>
+<div class="container">
+
+    <div class="callout callout-info giohang">
+        <h5><i class="fas fa-info"></i> Note:</h5>
+        Vui lòng xác nhận lại các thông tin dưới đây!
+    </div>
+    <div class="invoice p-3 mb-3">
+        <div class="row">
+            <div class="col-12 mb-5 mt-3">
+                <h4>
+                    <div class="logo_container">
+                        @*<a href="#" style="color: #b76f2c;">Vân Đình</a>*@
+                        <img src="~/Content/Assets/images/logo.png" />
+                    </div>
+                </h4>
+            </div>
+            <div class="col-12 mb-5 text-center">
+                <h4>
+                    XÁC NHẬN ĐẶT BÀN
+                </h4>
+                <p>Chi tiết đơn hàng đặt bàn</p>
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row invoice-info">
+            <div class="col-sm-4 invoice-col">
+                Địa chỉ nhà hàng
+                <address>
+                    <strong>Nhà hàng Vân Đình</strong><br>
+                    76 Trần Phú, Điện Biên, Ba Đình, Hà Nội<br>
+                    Phone: +84 856 787 678<br>
+                </address>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+                Thông tin người đặt
+                <address>
+                    <strong>@ViewBag.name</strong><br>
+                    Số người: @ViewBag.phone<br>
+                    Số điện thoại: @ViewBag.phone<br>
+                </address>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+                Thời gian
+                <address>
+                    <strong>Ngày: @ViewBag.day</strong><br>
+                    Thời gian: @ViewBag.starttime - @ViewBag.endtime<br>
+                    Mã bàn: @ViewBag.code<br>
+                </address>
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <div class="col-12 table-responsive mt-2 mb-2 allproducts">
+                @if (Model != null && Model.Any())
+                {
+                    var stt = 0;
+                    var tongtien = decimal.Zero;
+                    var sl = 0;
+                    var Total = decimal.Zero;
+                    var Tax = decimal.Zero;
+                    var shipping = decimal.Zero;
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Ảnh</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                tongtien += item.TotalPrice;
+                                sl += item.Quantity;
+                                var thanhtien = @item.Price * @item.Quantity;
+                                <tr id="trow_@item.ProductId" style="line-height: 50px;">
+                                    <td>@stt</td>
+                                    <td><a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.ProductId">@item.ProductName</a></td>
+                                    <td><img src="@item.ProductImage" style="height: 50px;" /></td>
+                                    <td>@Common.FormatNumber(item.Price, 2)</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@Common.FormatNumber(item.TotalPrice, 2)</td>
+                                </tr>
+                                stt++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3 pr-4">
+                                <label for="formNote" class="form-label">Chú thích</label>
+                                <textarea class="form-control" id="formNote" rows="3" readonly>@ViewBag.note</textarea>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <p class="lead">Giá tiền</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width:50%">Số lượng:</th>
+                                            <td>@sl</td>
+                                        </tr>
+                                        @*<tr>
+                                            <th>Tax (9.3%)</th>
+                                            <td>0đ</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping:</th>
+                                            <td>0đ</td>
+                                        </tr>*@
+                                        <tr>
+                                            <th>Total:</th>
+                                            @if (tongtien > 0)
+                                            {
+                                                Total = tongtien + Tax + shipping;
+                                            }
+                                            <td>@Common.FormatNumber(Total, 0)đ</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row no-print">
+            <div class="col-12 row">
+                <div class="col-6">
+                    <p class="lead">Phương thức thanh toán: </p>
+                    <img src="~/Content/clients/dist/img/credit/visa.png" alt="Visa">
+                    <img src="~/Content/clients/dist/img/credit/mastercard.png" alt="Mastercard">
+                    <img src="~/Content/clients/dist/img/credit/american-express.png" alt="American Express">
+                    <img src="~/Content/clients/dist/img/credit/paypal2.png" alt="Paypal">
+                    @*<p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                        Đặt ship: <br />
+                        - Nhận hàng tại nhà<br />
+                        ...
+                        <br />
+                        Đặt bàn: <br />
+                        - Sử dụng món tại quán<br />
+                        ...
+                    </p>*@
+                </div>
+                <div class="col-6">
+                    <div class="form-group" data-select2-id="29">
+                        <label>Chọn phương thức thanh toán</label>
+                        <div class="form-group" id="load_form_payment">
+                            @*<h4> <label>Chọn phương thức thanh toán:</label><br /></h4>*@
+                            @*<h5>Cách 1: Chuyển hướng sang VNPAY chọn phương thức thanh toán</h5>*@
+                            <label><input type="radio" name="TypePaymentVN" value="0" checked /> Cổng thanh toán VNPAY </label>
+                            @*<h5>Cách 2: Tách phương thức thanh toán tại site của Merchant</h5>*@
+                            <label>@*<input type="radio" name="TypePaymentVN" value="1" /> Thanh toán qua ứng dụng hỗ trợ VNPAYQR*@ </label><br />
+                            <label>@*<input type="radio" name="TypePaymentVN" value="2" /> ATM-Tài khoản ngân hàng nội địa*@ </label><br />
+                            <label>@*<input type="radio" name="TypePaymentVN" value="3" /> Thanh toán qua thẻ quốc tế*@ </label><br />
+                        </div>
+                        <a href="#" id="btnCheckOutBillLink" disabled>
+                            <button type="submit" class="btn btn btn-primary float-right" id="btnCheckOutBill" style="margin-right: 5px;">
+                                Đặt ban
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var Code = "";
+        $("#btnCheckOutBill").click(function (e) {
+            e.preventDefault();
+            var TyPaymentVN = $('input[name="TypePaymentVN"]').val();
+            $.ajax({
+                url: '/OrderTable/AddWithProduct',
+                type: 'POST',
+                data: { TyPaymentVN: TyPaymentVN },
+                success: function (rs) {
+                    if (rs.Success) {
+                        var url = rs.Url;
+                        window.location.href = url;
+                    } else {
+
+                    }
+                }
+            });
+        })
+
+
+    })
+</script>
+@section scripts{
+    <!-- jQuery -->
+    <script src="~/Content/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/Assets/js/single_custom.js"></script>
+}
+

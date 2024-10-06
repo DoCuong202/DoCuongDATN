@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.Posts>
+<link href="~/Content/Assets/styles/main_styles.css" rel="stylesheet" />
+<style>
+    .blog-title a {
+        color: #ffe200;
+        font-family: SVN-Hydrella;
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 50px;
+        margin: 20px 0px 26px;
+        text-align: center;
+        text-shadow: #00000003 0px 0px 1px;
+    }
+    .item-blog{
+        display: block;
+        height: 450px;
+        text-align: center;
+    }
+    .blog-img {
+        height: 300px;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+        .blog-img img {
+            width: 100%; /* Đặt độ rộng của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+            height: 100%; /* Đặt chiều cao của hình ảnh thành 100% để đảm bảo nó được điều chỉnh theo khung hình */
+            object-fit: cover; /* Điều chỉnh hình ảnh để nó bao phủ toàn bộ khung hình */
+            object-position: center;
+        }
+</style>
+
+@if (Model != null && Model.Any())
+{
+
+    foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="item-blog">
+                <div class="blog-img" style="cursor:pointer;">
+                    <a href="cauchuyenamthuc/@item.Alias-@item.Id"><img src="@item.Image" /></a>
+                </div>
+                <div class="blog-title">
+                    <a href="cauchuyenamthuc/@item.Alias-@item.Id">@item.Title</a>
+                </div>
+                <div class="blog-des">
+                    <p>@item.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+}

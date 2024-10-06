@@ -1,0 +1,135 @@
+﻿@model BanHangOnline.Models.CreateAccountViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/productcategory" class="nav-link">Tài khoản</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Thêm mới tài khoản</a>
+        </li>
+    </ul>
+}
+
+@if (Model != null)
+{
+    <section class="content pt-3">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin thêm mới tài khoản</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    <input type="hidden" value="@Model.Email" name="Email" />
+                    <div class="bs-stepper-content">
+                        <!-- your steps content here -->
+                        <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Họ và tên</label>
+                                @Html.TextBoxFor(x => x.FullName, new { @class = "form-control", @placeholder = "Nhập họ tên" })
+                                @Html.ValidationMessageFor(x => x.FullName, null, new { @class = "text-danger", @value = Model.FullName })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">User name</label>
+                                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Nhập username" })
+                                @Html.ValidationMessageFor(x => x.Username, null, new { @class = "text-danger", @value = Model.Username })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Phone</label>
+                                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @placeholder = "Nhập số điện thoại" })
+                                @Html.ValidationMessageFor(x => x.Phone, null, new { @class = "text-danger", @value = Model.Phone })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Quyền</label>
+                                @Html.DropDownListFor(x => x.Role, ViewBag.Role as SelectList, "Chọn quyền", new { @class = "form-control", @value = Model.Role })
+                            </div>
+                        </div>
+                        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+
+                            <a class="btn btn-danger" href="/admin/account"><i class="fas fa-undo"></i></a>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Thêm</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="content pt-3">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin thêm mới tài khoản</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    <div class="bs-stepper-content">
+                        <!-- your steps content here -->
+                        <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Họ và tên</label>
+                                @Html.TextBoxFor(x => x.FullName, new { @class = "form-control", @placeholder = "Nhập họ tên" })
+                                @Html.ValidationMessageFor(x => x.FullName, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">User name</label>
+                                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Nhập username" })
+                                @Html.ValidationMessageFor(x => x.Username, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Phone</label>
+                                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @placeholder = "Nhập số điện thoại" })
+                                @Html.ValidationMessageFor(x => x.Phone, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Nhập email" })
+                                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Quyền</label>
+                                @Html.DropDownListFor(x => x.Role, ViewBag.Role as SelectList, "Chọn quyền", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mật khẩu</label>
+                                @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Nhập mật khẩu" })
+                                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nhập lại mật khẩu</label>
+                                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập lại mật khẩu" })
+                                @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+
+                            <a class="btn btn-danger" href="/admin/account"><i class="fas fa-undo"></i></a>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Thêm</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Main content -->

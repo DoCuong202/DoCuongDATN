@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/contact_responsive.css">
+<style>
+    .contact-phone-email{
+        margin: 5px;
+    }
+    .contact_map iframe{
+        width: 100%;
+    }
+    .contact_contents h1 {
+        color: #6950cc;
+        font-family: SVN-Hydrella;
+        font-size: 53px;
+        font-weight: 600;
+        line-height: 74px;
+        text-align: center;
+    }
+    .contact-phone-email h2 {
+        color: #262626;
+        font-family: Texturina !important;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 37px;
+        text-align: center;
+    }
+    .contact_container p {
+        color: #262626;
+        font-family: Texturina !important;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 20px;
+        margin: 0px 0px 15px;
+        text-align: center;
+    }
+    .follow_us_contents h1 {
+        color: #6950cc;
+        font-family: Texturina !important;
+        /*font-size: 24px;*/
+        /*font-weight: 800;*/
+        /*line-height: 37px;*/
+        text-align: center;
+    }
+
+</style>
+<div class="super_container">
+    <div class="container contact_container">
+        <div class="row">
+            <div class="col-lg-6 contact_col">
+                <div class="contact_contents">
+                    <h1>
+                        Liên hệ
+                    </h1>
+                    <p>
+                    </p>
+                    <div class="contact-phone-email">
+                        <h2>Nhà hàng Vân Đình</h2>
+                        <p>195 Đường Cầu Diễn, Hà Nội</p>
+                        <p>+84 856 787 678</p>
+                        <p>netviet@gmail.com</p>
+                    </div>
+                    <div class="contact-phone-email">
+                        <h2>Thứ Hai - Chủ Nhật</h2>
+                        <p>10am – 2am</p>
+                        <p>5pm – 11pm</p>
+                    </div>
+
+                    <div class="follow_us_contents">
+                        <h1>
+                            Theo dõi chúng tôi
+                        </h1>
+                        <ul class="social d-flex flex-row">
+                            <li><a href="#" style="background-color: #3a61c9"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" style="background-color: #41a1f6"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" style="background-color: #fb4343"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" style="background-color: #8f6247"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 get_in_touch_col">
+                <div class="get_in_touch_contents">
+                    <div class="contact_map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4736632130093!2d105.73253187410087!3d21.05373598692251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345457e292d5bf%3A0x20ac91c94d74439a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1710315815650!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/Assets/js/contact_custom.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+}

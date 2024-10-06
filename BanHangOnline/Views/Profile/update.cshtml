@@ -1,0 +1,56 @@
+﻿@model BanHangOnline.Models.ApplicationUser
+
+
+<form class="form-horizontal">
+    <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Họ tên</label>
+        <div class="col-sm-10">
+            <input value="@ViewBag.FullName" type="text" class="form-control" id="inputName" placeholder="Name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputAddress" class="col-sm-2 col-form-label">Địa chỉ</label>
+        <div class="col-sm-10">
+            <input value="@ViewBag.Address" type="text" class="form-control" id="inputAddress" placeholder="Name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputPhone" class="col-sm-2 col-form-label">Số điện thoại</label>
+        <div class="col-sm-10">
+            <input value="@ViewBag.Phone" type="text" class="form-control" id="inputPhone" placeholder="Name">
+        </div>
+    </div>
+    <input value="@ViewBag.UserId" type="hidden" id="Idcustomer" />
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+            <button type="submit" class="btn btn-danger" id="successUpdate">Lưu</button>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '#successUpdate', function () {
+            var IdCustomer = $("#Idcustomer").val();
+            var fullName = $("#inputName").val();
+            var Address = $("#inputAddress").val();
+            var Phone = $("#inputPhone").val();
+            $.ajax({
+                url: '/Profile/ToUpdate',
+                type: 'POST',
+                data: { IdCustomer: IdCustomer, fullName: fullName, Address: Address, Phone: Phone },
+                success: function (rs) {
+                    if (rs.success) {
+                        alert("Update thanh cong!");
+                    } else {
+                        alert("Update that bai!");
+                    }
+
+                }
+            })
+        });
+    })
+</script>

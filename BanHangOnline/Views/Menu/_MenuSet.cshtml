@@ -1,0 +1,10 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.ProductCategory>
+
+@if (Model != null && Model.Any())
+{
+    foreach(var item in Model.Where(x => x.isSet == true))
+    {
+        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@item.Alias">@item.Title</li>
+    }
+}
+

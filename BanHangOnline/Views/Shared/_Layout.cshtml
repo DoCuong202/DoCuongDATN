@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Vân Đình</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Colo Shop Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Content/Assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/responsive.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/Content/Assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Content/Assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .logo_container img {
+            height: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="super_container">
+
+        <!-- Header -->
+
+        <header class="header trans_300">
+
+            <!-- Top Navigation -->
+
+            <div class="top_nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="top_nav_left">free shipping on all u.s orders over $50</div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="top_nav_right">
+                                <ul class="top_nav_menu">
+                                    <li class="language">
+                                        <a href="#">
+                                            Vietnamses
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="language_selection">
+                                            <li><a href="#">English</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="account">
+                                        @if (!Request.IsAuthenticated)
+                                        {
+                                            <a href="#">
+                                                My Account
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="account_selection">
+                                                <li><a href="/account/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                                                <li><a href="/account/Register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                Welcome: @User.Identity.Name
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="account_selection">
+                                                <li><a href="javascript:document.getElementById('logOffForm').submit()"><i class="fa fa-user-plus" aria-hidden="true"></i> Logout</a></li>
+                                            </ul>
+                                        }
+
+                                    </li>
+
+                                </ul>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <div style="display:none">
+                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Navigation -->
+
+            <div class="main_nav_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <div class="logo_container">
+                                <img src="~/Content/Assets/images/logo.png" />
+                            </div>
+                            <nav class="navbar">
+                                @Html.Action("MenuTop", "Menu")
+                                <ul class="navbar_user">
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                    @if (!Request.IsAuthenticated)
+                                    {
+                                        <input type="hidden" value="null" id="RqToProfile" />
+                                    }
+                                    else
+                                    {
+
+                                        <input type="hidden" value="null" id="RqToProfile" />
+                                    }
+                                    @if (!Request.IsAuthenticated)
+                                    {
+                                        <li><a href="/account/login"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/profile/index"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+
+                                    }
+                                    <li class="checkout">
+                                        <a href="/gio-hang">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            @*<span id="checkout_items" class="checkout_items">0</span>*@
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="hamburger_container">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- Slider -->
+        @RenderBody()
+
+        <!-- Footer -->
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_nav_container">
+                            <div class="cr">Copyright ©2024 by Net Viet Vietnam. All Rights Reserved Site by Net Viet Vietnam</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+
+
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/js/custom.js"></script>
+    <script src="~/Scripts/AddToCart.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/Content/Assets/plugins/select2/js/select2.full.min.js"></script>
+</body>
+</html>

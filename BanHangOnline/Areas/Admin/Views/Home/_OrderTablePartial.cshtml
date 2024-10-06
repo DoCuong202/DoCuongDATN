@@ -1,0 +1,100 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.Order>
+
+
+@foreach (var item in Model)
+{
+    <tr id="trow_@item.Id">
+        <th class="btnDetailorder" data-id="@item.Id" data-toggle="modal" data-target="#modal-xl" scope="row">@item.Code <i class="fa fa-external-link" aria-hidden="true"></i></th>
+        <td>@item.CreatedDate</td>
+        <td class="statusNow">
+            @if (@item.statusOrder == -1)
+            {
+                <span>Đang chuẩn bị</span>
+            }
+            else if (@item.statusOrder == 0)
+            {
+                <span>Đang giao</span>
+            }
+            else if (@item.statusOrder == 1)
+            {
+                <span>Giao thành công</span>
+            }
+            else if (@item.statusOrder == 2)
+            {
+                <span>Giao thất bại</span>
+            }
+        </td>
+        <td data-id="@item.Id" class="btn btnUpdatestatusOrder" data-toggle="modal" data-target="#modal-default"><i class="fas fa-edit"></i> Cập nhật</td>
+    </tr>
+    <input type="hidden" data-id="@item.Id" id="IdOrder" />
+
+    @*<input type="hidden" data-id="@item.Id" id="IdOrder" />*@
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.btnDetailorder', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            $("#IdOrder").val(id);
+        });
+
+        $('#modal-xl').on('show.bs.modal', function () {
+            var idOrder = $("#IdOrder").val();
+            var url = '/admin/order/detail2/' + idOrder;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $(".body-detail").html(data);
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi tải dữ liệu đơn hàng.');
+                }
+            });
+        });
+
+        var selectedRowId; // Biến để lưu id của dòng được chọn
+        var originalStatus; // Biến để lưu trạng thái ban đầu của dòng
+
+        $(".btnUpdatestatusOrder").click(function () {
+            selectedRowId = $(this).data("id");
+            $("#IdOrder").val(selectedRowId);
+            // Lưu trạng thái ban đầu của dòng
+            originalStatus = $(".statusNow", "#trow_" + selectedRowId).text().trim();
+        });
+
+        $("#btnUpdateStatus").click(function () {
+            var selectedValue = $("#statusSelect").val();
+            var idOrder = $("#IdOrder").val();
+
+            $.ajax({
+                url: '/admin/order/update',
+                type: 'POST',
+                data: { id: idOrder, statusOrder: selectedValue },
+                success: function (result) {
+                    var updatedRow = $("#trow_" + selectedRowId);
+                    $("#modal-default").hide();
+                    //$(".statusNow", updatedRow).text(getStatusText(selectedValue));
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error("Ajax request failed: ", error);
+                }
+            });
+        });
+
+        function getStatusText(statusValue) {
+            // Hàm này trả về văn bản tương ứng với giá trị trạng thái
+            if (statusValue == -1) {
+                return "Đang chuẩn bị";
+            } else if (statusValue == 0) {
+                return "Đang giao";
+            } else {
+                return "Giao thành công";
+            }
+        }
+    })
+</script>

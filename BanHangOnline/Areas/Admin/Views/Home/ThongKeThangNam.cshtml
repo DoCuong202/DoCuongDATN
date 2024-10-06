@@ -1,0 +1,262 @@
+﻿
+<style>
+    .height40px {
+        line-height: 40px;
+        font-family: Texturina;
+        font-size: 20px !important;
+        font-weight: 300;
+    }
+    .description-block > .description-header{
+        font-size: 20px !important;
+    }
+    .height40 {
+        line-height: 40px;
+        font-family: Texturina;
+        font-size: 20px !important;
+        font-weight: 300;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title height40">Cập nhật số lượng</h5>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                            <i class="fas fa-wrench"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <a href="#" class="dropdown-item">Action</a>
+                            <a href="#" class="dropdown-item">Another action</a>
+                            <a href="#" class="dropdown-item">Something else here</a>
+                            <a class="dropdown-divider"></a>
+                            <a href="#" class="dropdown-item">Separated link</a>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <div class="box-boloc">
+                                    <div class="row">
+                                        <div class="boloc">
+                                            <div class="col-12">
+                                                <div class="option-boloc">
+                                                    <div class="option-selected">
+                                                        <p class="txt-option-selected">Tuần này</p>
+                                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="option">
+                                                        <div id="1" class="option-tuan">Tuần này</div>
+                                                        <div id="2" class="option-nam">Năm nay</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <div id="main" style="height: 400px;"></div>
+                        <div class="Legend_legend__h9a1F">
+                            <div class="Legend_label__HSSWz">
+                                <div class="StatusLight-statuslight--ZDk4M">
+                                    <div class="StatusLight-bg--ZWIyN">
+                                        <div class="StatusLight-status--MWUyY StatusLight-inactive--MjViM" style="background-color: rgba(38, 128, 235, 0.8);"></div>
+                                    </div>
+                                    <span class="en-US">Lượt đặt giao</span>
+                                </div>
+                            </div>
+                            <div class="Legend_label__HSSWz">
+                                <div class="StatusLight-statuslight--ZDk4M">
+                                    <div class="StatusLight-bg--ZWIyN">
+                                        <div class="StatusLight-status--MWUyY StatusLight-inactive--MjViM" style="background-color: #60ff00ff;"></div>
+                                    </div>
+                                    <span class="en-US">Lượt đặt bàn</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- ./card-body -->
+            <div class="card-footer">
+                <div class="row" id="sltheotuan">
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                            <h5 class="description-header">@ViewBag.TongDonBanTrongTuan</h5>
+                            <span class="description-text">ĐƠN ĐẶT BÀN</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                            <h5 class="description-header">@ViewBag.TongDonHangTrongTuan</h5>
+                            <span class="description-text">ĐƠN ĐẶT GIAO</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                            <h5 class="description-header">@ViewBag.TongDonBanCODTrongTuan</h5>
+                            <span class="description-text">THANH TOÁN COD</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block">
+                            <h5 class="description-header">@ViewBag.TongDonBanVNPAYTrongTuan</h5>
+                            <span class="description-text">THANH TOÁN VNPAY</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="sltheonam">
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                            <h5 class="description-header">@ViewBag.TongDonBanTrongNam</h5>
+                            <span class="description-text">ĐƠN ĐẶT BÀN</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                            <h5 class="description-header">@ViewBag.TongDonHangTrongNam</h5>
+                            <span class="description-text">ĐƠN ĐẶT GIAO</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                            <h5 class="description-header">@ViewBag.TongDonBanCODTrongNam</h5>
+                            <span class="description-text">THANH TOÁN COD</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block">
+                            <h5 class="description-header">@ViewBag.TongDonBanVNPAYTrongNam</h5>
+                            <span class="description-text">THANH TOÁN VNPAY</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+<script>
+            $(document).ready(function () {
+                var optionselected = $('.option-selected');
+                var option = $('.option');
+
+                luottruycaptuan();
+                $("#sltheotuan").show();
+                $("#sltheonam").hide();
+                option.hide();
+
+                optionselected.on('click', function () {
+                    option.toggle();
+                });
+
+                var optiontuan = $('.option-tuan');
+                optiontuan.on('click', function () {
+                    luottruycaptuan();
+                    option.hide();
+                    $("#sltheotuan").show();
+                    $("#sltheonam").hide();
+                    $('.txt-option-selected').text("Tuần này");
+                });
+
+                var optionnam = $('.option-nam');
+                optionnam.on('click', function () {
+                    luottruycapthang();
+                    option.hide();
+                    $("#sltheotuan").hide();
+                    $("#sltheonam").show();
+                    $('.txt-option-selected').text("Năm nay");
+                });
+            });
+
+            function luottruycapthang() {
+                var hang = [@ViewBag.DonHangTheoThang];
+                var ban = [@ViewBag.DonBanTheoThang];
+
+                var app = {};
+
+                var chartDom = document.getElementById('main');
+                var myChart = echarts.init(chartDom);
+                var option;
+
+                option = {
+                    legend: {},
+                    tooltip: {},
+                    dataset: {
+                        source: [
+                            ['Tháng 1', hang[0], ban[0]],
+                            ['Tháng 2', hang[1], ban[1]],
+                            ['Tháng 3', hang[2], ban[2]],
+                            ['Tháng 4', hang[3], ban[3]],
+                            ['Tháng 5', hang[4], ban[4]],
+                            ['Tháng 6', hang[5], ban[5]],
+                            ['Tháng 7', hang[6], ban[6]]
+                            ['Tháng 8', hang[7], ban[7]]
+                            ['Tháng 9', hang[8], ban[8]]
+                            ['Tháng 10', hang[9], ban[9]]
+                            ['Tháng 11', hang[10], ban[10]]
+                            ['Tháng 12', hang[11], ban[11]]
+                        ]
+                    },
+                    xAxis: { type: 'category' },
+                    yAxis: {},
+                    series: [{ type: 'bar' }, { type: 'bar' }]
+                };
+
+                option && myChart.setOption(option);
+            }
+
+            function luottruycaptuan() {
+                var hang = [@ViewBag.DonHangTheoTuan];
+                var ban = [@ViewBag.DonBanTheoTuan];
+
+                var app = {};
+
+                var chartDom = document.getElementById('main');
+                var myChart = echarts.init(chartDom);
+                var option;
+
+                option = {
+                    legend: {},
+                    tooltip: {},
+                    dataset: {
+                        source: [
+                            ['Thứ 2', hang[0], ban[0]],
+                            ['Thứ 3', hang[1], ban[1]],
+                            ['Thứ 4', hang[2], ban[2]],
+                            ['Thứ 5', hang[3], ban[3]],
+                            ['Thứ 6', hang[4], ban[4]],
+                            ['Thứ 7', hang[5], ban[5]],
+                            ['Chủ nhật', hang[6], ban[6]]
+                        ]
+                    },
+                    xAxis: { type: 'category' },
+                    yAxis: {},
+                    series: [{ type: 'bar' }, { type: 'bar' }]
+                };
+
+                option && myChart.setOption(option);
+
+            }
+</script>

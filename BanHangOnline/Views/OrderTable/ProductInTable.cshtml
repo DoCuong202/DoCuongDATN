@@ -1,0 +1,189 @@
+﻿@model IEnumerable<BanHangOnline.Models.ShoppingCartItem>
+@using BanHangOnline.Common
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Content/Assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Content/clients/dist/css/adminlte.min.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/bootstrap4/bootstrap.min.css">
+<link href="~/Content/Assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="~/Content/Assets/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_responsive.css">
+<style>
+    .giohang {
+        margin-top: 20px;
+    }
+
+    .selector_in_cart {
+        margin: 0 !important;
+    }
+    h1, h2, h3, h4, h5 {
+        font-family: Texturina !important;
+    }
+
+    p {
+        font-family: Texturina !important;
+        font-size: 20px !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    /*    li a {
+        font-family: Texturina !important;
+        font-size: 17px !important;
+    }*/
+
+    tr td {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    tr th {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    label {
+        font-size: 20px !important;
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+
+    b, strong {
+        font-family: Texturina !important;
+        font-weight: 300;
+        line-height: 31px;
+    }
+</style>
+<div class="invoice container p-3 mb-3 giohang">
+    <div class="row">
+        <div class="col-12">
+            <h4>
+                <small class="text-center">Thông tin giỏ hàng</small>
+            </h4>
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="row">
+        <div class="col-12 table-responsive mt-2 mb-2 allproducts">
+            @if (Model != null && Model.Any())
+            {
+                var stt = 0;
+                var tongtien = decimal.Zero;
+                var sl = 0;
+                var Total = decimal.Zero;
+                var Tax = decimal.Zero;
+                var shipping = decimal.Zero;
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>STT</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th style="width: 150px;">
+                                <a href="" id="btnDeleteAll">Xóa toàn bộ</a>
+                            </th>
+                            <th style="width: 150px;" class="text-center">
+                                Chọn tất cả
+                                <input type="checkbox" id="SelectAll" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            tongtien += item.TotalPrice;
+                            sl += item.Quantity;
+                            var thanhtien = @item.Price * @item.Quantity;
+                            <tr id="trow_@item.ProductId" style="line-height: 50px;" class="my-auto text-center">
+                                <td>@stt</td>
+                                <td><a href="/chi-tiet-san-pham/@item.ProductCategoryID-@item.ProductId">@item.ProductName</a></td>
+                                <td><img src="@item.ProductImage" style="height:50px;" /></td>
+                                <td>@Common.FormatNumber(item.Price, 2)</td>
+                                <td width="100px" class="my-auto">
+                                    <input type="number" class="form-control input-update" value="@item.Quantity" id="Quantity_@item.ProductId" />
+                                </td>
+                                <td>@Common.FormatNumber(item.TotalPrice, 2)</td>
+                                <td>
+                                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                    <a href="#" data-id="@item.ProductId" id="update_@item.ProductId" class="btn btn-sm btn-success btnUpdate update_@item.ProductId">Lưu</a>
+                                </td>
+                                @*<td>
+                                        <a href="#" data-id="@item.ProductId" id="update_@item.ProductId" class="btn btn-sm btn-success btnUpdate update_@item.ProductId">Lưu</a>
+                                    </td>*@
+                                <td class="text-center" style="width: 50px;"><input type="checkbox" class="cbkItem" value="@item.ProductId" /></td>
+                            </tr>
+                            stt++;
+                        }
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="lead">Phương thức thanh toán trước: </p>
+                        <img src="~/Content/clients/dist/img/credit/visa.png" alt="Visa">
+                        <img src="~/Content/clients/dist/img/credit/mastercard.png" alt="Mastercard">
+                        <img src="~/Content/clients/dist/img/credit/american-express.png" alt="American Express">
+                        <img src="~/Content/clients/dist/img/credit/paypal2.png" alt="Paypal">
+
+                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                            - Quý khách vui lòng thanh toán 100% tiền đặt món trước khi đặt bàn<br />
+                            - Thời gian giữ bàn là 20 phút<br />
+                        </p>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-6">
+                        <p class="lead">Giá tiền</p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th style="width:50%">Số lượng:</th>
+                                        <td>@sl</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Total:</th>
+                                        @if (tongtien > 0)
+                                        {
+                                            Total = tongtien + Tax + shipping;
+                                        }
+                                        <td>@Common.FormatNumber(Total, 0)đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!-- jQuery -->
+    <script src="~/Content/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/Assets/js/single_custom.js"></script>
+}

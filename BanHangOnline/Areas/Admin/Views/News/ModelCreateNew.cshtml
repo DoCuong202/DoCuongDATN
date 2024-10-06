@@ -1,0 +1,132 @@
+﻿@model BanHangOnline.Models.EF.News
+
+@section naviheader{
+    <ul class="navbar-nav">
+    </ul>
+}
+<section class="content scroll-smooth">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @*<h3 class="card-title">Thông tin thêm mới tin tức</h3>*@
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Add", "News", FormMethod.Post, new { }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false)
+                <div class="bs-stepper-content">
+                    <!-- your steps content here -->
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tiêu đề</label>
+                            @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Nhập tiêu đề" })
+                            @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mô tả</label>
+                            @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Nhập mô tả" })
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Chi tiết</label>
+                            @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết tin", @id = "txtDetail" })
+
+                        </div>
+                        @*<div class="form-group">
+                            <label for="exampleInputEmail1">ID Danh mục</label>
+                            @Html.TextAreaFor(x => x.CategoryID, new { @class = "form-control", @placeholder = "ID Danh mục" })
+
+                        </div>*@
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Trạng thái hiển thị</label>
+                            @Html.CheckBoxFor(x => x.IsActive, new { @checked = "checked" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Seo Title</label>
+                            @Html.TextBoxFor(x => x.SeoTitle, new { @class = "form-control", @placeholder = "Nhập Title" })
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Seo Description</label>
+                            @Html.TextAreaFor(x => x.SeoDescription, new { @class = "form-control", @placeholder = "Nhập Description" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Seo Keywords</label>
+                            @Html.TextAreaFor(x => x.SeoKeywords, new { @class = "form-control", @placeholder = "Nhập Keywords" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Ảnh đại diện</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control", @placeholder = "Url ảnh" })
+                                </div>
+                                <div class="input-group-append">
+                                    <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage')" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+
+                        <a class="btn btn-danger" href="/admin/news">Quay lại</a>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- jQuery -->
+<script src="~/Content/clients/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Content/clients/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="~/Content/clients/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="~/Content/clients/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="~/Content/clients/plugins/moment/moment.min.js"></script>
+<script src="~/Content/clients/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/Content/clients/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="~/Content/clients/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/Content/clients/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="~/Content/clients/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="~/Content/clients/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="~/Content/clients/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Content/clients/dist/js/adminlte.min.js"></script>
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            })
+        })
+        function BrowseServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+
+    </script>
+}
+
+

@@ -1,0 +1,214 @@
+﻿@model BanHangOnline.Models.EF.Product
+@{
+    ViewBag.Title = "Chi tiet san pham";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+@*<link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">*@
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/single_responsive.css">
+<link rel="stylesheet" href="~/Content/Assets/plugins/fontawesome-free/css/all.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/Content/Assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<div class="container single_product_container">
+    <div class="row">
+        <div class="col">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    @if (ViewBag.productcategorytitle != null)
+                    {
+                        <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>@ViewBag.productCategoryTitle</a></li>
+
+                    }
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>@Model.Title</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="single_product_pics">
+                <div class="row">
+                    <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                        @Html.Action("ListImageInDetail", "ProductImageInDetail", new { Id = Model.Id })
+                    </div>
+                    <div class="col-lg-9 image_col order-lg-2 order-1">
+                        <div class="single_product_image">
+                            <div class="single_product_image_background" style="background-image:url('@Model.Image');"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="product_details">
+                <div class="product_details_title">
+                    <h2>@Model.Title</h2>
+                    <p>@Model.Description</p>
+                </div>
+                <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+                    <span class="ti-truck mb-3"></span><span>Miễn Phí vận Chuyển</span>
+                </div>
+                @if (Model.PriceSale > 0 && Model.IsSale == true)
+                {
+                    <div class="original_price">@BanHangOnline.Common.Common.FormatNumber(Model.Price) Đ</div>
+                    <div class="product_price">@BanHangOnline.Common.Common.FormatNumber(Model.PriceSale) Đ</div>
+                }
+                else
+                {
+                    <div class="product_price pt-3">@BanHangOnline.Common.Common.FormatNumber(Model.Price) Đ</div>
+
+                }
+                <ul class="star_rating">
+                    @if (ViewBag.tbSao == 1)
+                    {
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    }
+                    @if (ViewBag.tbSao == 2)
+                    {
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    }
+                    @if (ViewBag.tbSao == 3)
+                    {
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    }
+                    @if (ViewBag.tbSao == 4)
+                    {
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    }
+                    @if (ViewBag.tbSao == 5)
+                    {
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    }
+                </ul>
+                <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                    <span>Số lượng:</span>
+                    <div class="quantity_selector">
+                        <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                        <span id="quantity_value">1</span>
+                        <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="btn mx-3 red_button review_submit_btn trans_300"><a href="#" class="btnAddCart" data-id="@Model.Id">Thêm vào giỏ</a></div>
+                    @*<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="tabs_section_container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="tabs_container">
+                    <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+                        <li class="tab" data-active-tab="tab_2"><span>Thông tin chi tiết</span></li>
+                        <li class="tab active" data-active-tab="tab_3"><span>Bình luận</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                @if (Model != null)
+                {
+                    <div id="tab_2" class="tab_container">
+                        <div class="row">
+                            <div class="col additional_info_col">
+                                <div class="tab_title additional_info_title">
+                                    <h4>Chi tiết sản phẩm</h4>
+                                </div>
+                                <div class="chitietsanpham">@Html.Raw(Model.Detail)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab_3" class="tab_container active">
+                        <div class="row">
+                            <div class="col-lg-6 reviews_col">
+                                @Html.Action("Rates", "Products", new { Id = Model.ProductCode })
+                            </div>
+                            <div class="col-lg-6 add_review_col">
+                                @Html.Action("AddRate", "Products", new { Id = Model.ProductCode })
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        @*@if (ViewBag.productCategoryId != null)
+        {
+            <div class="row">
+                <div class="col">
+                    <div class="tab">Các sản phẩm liên quan</div>
+                    @Html.Action("ProductLQ", "Products", new { idCategory = ViewBag.productCategoryId, idProduct = Model.Id })
+                </div>
+            </div>
+        }*@
+
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        // Hàm để lấy src của <img> bên trong <li> có lớp 'active'
+        function changeBackgroundImage(imgSrc) {
+            $('.single_product_image .single_product_image_background').css('background-image', 'url(' + imgSrc + ')');
+        }
+
+        function getActiveImageSrc() {
+            var activeLi = $('li.active');
+
+            if (activeLi.length > 0) {
+                var img = activeLi.find('img');
+                if (img.length > 0) {
+                    var imgSrc = img.attr('src');
+                    console.log("Active image src: " + imgSrc);
+                    var singleImage = $('.single_product_image_background');
+                    singleImage.css('background-image', 'url(' + imgSrc + ')');
+                } else {
+                    console.log("No image found inside the active <li> element.");
+                }
+            } else {
+                console.log("No <li> element with class 'active' found.");
+            }
+        }
+
+        // Sự kiện click trên ảnh
+        //$('li').on('click', function () {
+        //    getActiveImageSrc();
+        //});
+    });
+
+
+</script>
+@section scripts{
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/js/single_custom.js"></script>
+    <script src="~/Content/Assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Content/Assets/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Scripts/AddToCart.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+}

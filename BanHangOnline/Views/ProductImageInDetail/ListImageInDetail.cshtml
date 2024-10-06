@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<BanHangOnline.Models.EF.ProductImage>
+@if (Model != null && Model.Any())
+{
+    <div class="single_product_thumbnails">
+        <ul>
+            @foreach (var item in Model)
+            {
+                if (item.IsDefault == true)
+                {
+                    <li class="active"><img  src="@item.Image" alt="" data-image="@item.Image"></li>
+                }
+                else
+                {
+                    <li><img src="@item.Image" alt="" data-image="@item.Image"></li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+

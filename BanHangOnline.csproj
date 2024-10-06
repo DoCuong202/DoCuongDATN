@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Controllers\RatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\TotaldataController.cs" />
+    <Compile Include="Areas\Admin\Data\TopProductViewModel.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
@@ -300,6 +301,34 @@
     <Compile Include="Migrations\202404101547120_WebBanHangOnline19.Designer.cs">
       <DependentUpon>202404101547120_WebBanHangOnline19.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404210936251_WebBanHangOnline20.cs" />
+    <Compile Include="Migrations\202404210936251_WebBanHangOnline20.Designer.cs">
+      <DependentUpon>202404210936251_WebBanHangOnline20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404210941016_WebBanHangOnline21.cs" />
+    <Compile Include="Migrations\202404210941016_WebBanHangOnline21.Designer.cs">
+      <DependentUpon>202404210941016_WebBanHangOnline21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404211001211_WebBanHangOnline22.cs" />
+    <Compile Include="Migrations\202404211001211_WebBanHangOnline22.Designer.cs">
+      <DependentUpon>202404211001211_WebBanHangOnline22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404211631258_WebBanHangOnline23.cs" />
+    <Compile Include="Migrations\202404211631258_WebBanHangOnline23.Designer.cs">
+      <DependentUpon>202404211631258_WebBanHangOnline23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404211753044_WebBanHangOnline24.cs" />
+    <Compile Include="Migrations\202404211753044_WebBanHangOnline24.Designer.cs">
+      <DependentUpon>202404211753044_WebBanHangOnline24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404221320062_WebBanHangOnline25.cs" />
+    <Compile Include="Migrations\202404221320062_WebBanHangOnline25.Designer.cs">
+      <DependentUpon>202404221320062_WebBanHangOnline25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405040946169_WebBanHangOnline26.cs" />
+    <Compile Include="Migrations\202405040946169_WebBanHangOnline26.Designer.cs">
+      <DependentUpon>202405040946169_WebBanHangOnline26.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommonAstract.cs" />
@@ -324,6 +353,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OverViewModel.cs" />
+    <Compile Include="Models\OverViewTable.cs" />
     <Compile Include="Models\Payments\VnPayLibrary.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
@@ -396,6 +426,7 @@
     <Content Include="Content\Assets\images\desc_1.jpg" />
     <Content Include="Content\Assets\images\desc_2.jpg" />
     <Content Include="Content\Assets\images\desc_3.jpg" />
+    <Content Include="Content\Assets\images\logo.png" />
     <Content Include="Content\Assets\images\map_marker.png" />
     <Content Include="Content\Assets\images\product_1.png" />
     <Content Include="Content\Assets\images\product_10.png" />
@@ -5090,7 +5121,7 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="favicon1.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\AddToCart.js" />
@@ -5345,6 +5376,21 @@
     <Content Include="Areas\Admin\Views\Totaldata\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Rates\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Rates\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\viewAddProductAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderTable\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\datgiao.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\_OrderTablePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ThongKeThangNam.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ThongKeMonAn.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\EditItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\CartInOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\datban.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\_OrderTableDatBanPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\getImageEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderTable\Detail2.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderTable\ProductInDetailAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\noti.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -5360,6 +5406,7 @@
     <Content Include="Uploads\images\F_jGNGyaAAAQpHL.jpg" />
     <Content Include="Uploads\images\z5074725676264_c85985a791b2b2864b5ee98959fe09bf.png" />
     <Content Include="Uploads\_thumbs\Images\z5074725676264_c85985a791b2b2864b5ee98959fe09bf.png" />
+    <Content Include="Views\OrderTable\ProductInTable.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -5432,10 +5479,20 @@
     <Content Include="Views\Swiper\Slider_main_1.cshtml" />
     <Content Include="Views\Swiper\Slider_main_3.cshtml" />
     <Content Include="Views\Swiper\Slider_main_4.cshtml" />
+    <Content Include="Views\OrderTable\Add.cshtml" />
+    <Content Include="Views\OrderTable\ToOrderDetail.cshtml" />
+    <Content Include="Views\OrderTable\ProductInOrderDetail.cshtml" />
+    <Content Include="Views\OrderTable\CheckOut.cshtml" />
+    <Content Include="Views\OrderTable\VnpayReturn.cshtml" />
+    <Content Include="Views\Home\thongkedatgiao.cshtml" />
+    <Content Include="Views\Home\View1.cshtml" />
+    <Content Include="Views\Swiper\Slider_main_5.cshtml" />
+    <Content Include="Views\OrderTable\view1.cshtml" />
+    <Content Include="Views\Blogs\BaiVietMoiNhat.cshtml" />
+    <Content Include="Views\About\view1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
     <Folder Include="Uploads\files\" />
     <Folder Include="Views\Category\" />
@@ -5537,6 +5594,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404101547120_WebBanHangOnline19.resx">
       <DependentUpon>202404101547120_WebBanHangOnline19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210936251_WebBanHangOnline20.resx">
+      <DependentUpon>202404210936251_WebBanHangOnline20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210941016_WebBanHangOnline21.resx">
+      <DependentUpon>202404210941016_WebBanHangOnline21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404211001211_WebBanHangOnline22.resx">
+      <DependentUpon>202404211001211_WebBanHangOnline22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404211631258_WebBanHangOnline23.resx">
+      <DependentUpon>202404211631258_WebBanHangOnline23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404211753044_WebBanHangOnline24.resx">
+      <DependentUpon>202404211753044_WebBanHangOnline24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404221320062_WebBanHangOnline25.resx">
+      <DependentUpon>202404221320062_WebBanHangOnline25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405040946169_WebBanHangOnline26.resx">
+      <DependentUpon>202405040946169_WebBanHangOnline26.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
